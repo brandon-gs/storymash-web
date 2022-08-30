@@ -10,7 +10,13 @@
     "prettier": "prettier --check .",
     "cypress": "cypress open",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   },
   "dependencies": {
     "next": "12.2.5",
@@ -39,6 +45,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-storybook": "^0.6.4",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "4.8.2"
   }
