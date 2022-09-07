@@ -1,4 +1,5 @@
 import { FormLogin } from "@/modules/Auth/components";
+import { Counter } from "@/modules/Counter/components";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FormLogin />
+      <Counter />
     </Container>
   );
 };
