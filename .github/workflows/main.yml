@@ -16,6 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -26,7 +27,12 @@ jobs:
       - run: yarn lint
       - run: yarn prettier
       - run: yarn build
+
+      - name: Run tests with jest
+        run: yarn test:ci
+
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           start: yarn start
+          wait-on: "http://localhost:3000"

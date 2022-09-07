@@ -1,8 +1,18 @@
 {
   "extends": [
     "next/core-web-vitals",
+    "plugin:jest-dom/recommended",
     "eslint:recommended",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.test.tsx"],
+      "env": {
+        "jest": true
+      }
+    }
   ]
 }
