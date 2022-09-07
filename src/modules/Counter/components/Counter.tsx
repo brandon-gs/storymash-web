@@ -9,7 +9,6 @@ import {
   incrementIfOdd,
   selectCount,
 } from "../store/counterSlice";
-import "./Counter.css";
 
 function Counter() {
   const dispatch = useAppDispatch();

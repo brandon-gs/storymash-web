@@ -28,7 +28,7 @@ jobs:
       - run: yarn prettier
       - run: yarn build
 
-      - name: Jest tests
+      - name: Run tests with jest
         run: yarn test:ci
 
       - name: Cypress run
