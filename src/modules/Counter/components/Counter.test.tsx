@@ -3,12 +3,12 @@ import user from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import "@testing-library/jest-dom/extend-expect";
 
-// jest.mock("./counterAPI", () => ({
-//   fetchCount: (amount: number) =>
-//     new Promise<{ data: number }>((resolve) =>
-//       setTimeout(() => resolve({ data: amount }), 500)
-//     ),
-// }));
+jest.mock("./counterApi", () => ({
+  fetchCount: (amount: number) =>
+    new Promise<{ data: number }>((resolve) =>
+      setTimeout(() => resolve({ data: amount }), 500)
+    ),
+}));
 
 import { makeStore } from "@/core/store/store";
 import { Counter } from "@/modules/Counter/components";
