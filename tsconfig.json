@@ -20,7 +20,8 @@
       "@/theme/*": ["src/theme/*"],
       "@/modules": ["src/modules"],
       "@/modules/*": ["src/modules/*"],
-      "@/core/*": ["src/core/*"]
+      "@/core/*": ["src/core/*"],
+      "@/test/*": ["test/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
