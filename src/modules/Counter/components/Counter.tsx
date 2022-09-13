@@ -26,7 +26,7 @@ function Counter() {
         >
           -
         </button>
-        <span>{count}</span>
+        <span data-testid="counter">{count}</span>
         <button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}

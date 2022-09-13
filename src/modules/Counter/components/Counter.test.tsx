@@ -1,7 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "@/test/test-utils";
 import user from "@testing-library/user-event";
-import { Provider } from "react-redux";
-import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("./counterApi", () => ({
   fetchCount: (amount: number) =>
@@ -10,30 +9,17 @@ jest.mock("./counterApi", () => ({
     ),
 }));
 
-import { makeStore } from "@/core/store/store";
 import { Counter } from "@/modules/Counter/components";
 
 describe("<Counter />", () => {
   it("renders the component", () => {
-    const store = makeStore();
-
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    render(<Counter />);
 
     expect(screen.getByText("0")).toBeInTheDocument();
   });
 
   it("decrements the value", async () => {
-    const store = makeStore();
-
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    render(<Counter />);
 
     await user.click(screen.getByRole("button", { name: /decrement value/i }));
 
@@ -41,75 +27,84 @@ describe("<Counter />", () => {
   });
 
   it("increments the value", async () => {
-    const store = makeStore();
+    render(<Counter />);
 
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    const spanCounter = screen.getByTestId(/counter/i);
+    const currentValue = parseInt(spanCounter.textContent ?? "0");
+    const nextValue = (currentValue + 1).toString();
 
     await user.click(screen.getByRole("button", { name: /increment value/i }));
 
-    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText(nextValue)).toBeInTheDocument();
   });
 
   it("increments by amount", async () => {
-    const store = makeStore();
-
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    render(<Counter />);
 
     await user.type(
       screen.getByLabelText(/set increment amount/i),
       "{backspace}5"
     );
+
+    const inputAmount =
+      screen.getByLabelText<HTMLInputElement>(/set increment amount/i);
+    const inputValue = parseInt(inputAmount.value);
+    const spanCounter = screen.getByTestId(/counter/i);
+    const currentValue = parseInt(spanCounter.textContent ?? "0");
+
     await user.click(screen.getByRole("button", { name: /add amount/i }));
 
-    expect(screen.getByText("5")).toBeInTheDocument();
+    const nextValue = (currentValue + inputValue).toString();
+
+    expect(screen.getByText(nextValue)).toBeInTheDocument();
   });
 
   it("increments async", async () => {
-    const store = makeStore();
-
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    render(<Counter />);
 
     await user.type(
       screen.getByLabelText(/set increment amount/i),
       "{backspace}3"
     );
+
+    const inputAmount =
+      screen.getByLabelText<HTMLInputElement>(/set increment amount/i);
+    const inputValue = parseInt(inputAmount.value);
+    const spanCounter = screen.getByTestId(/counter/i);
+    const currentValue = parseInt(spanCounter.textContent ?? "0");
+
     await user.click(screen.getByRole("button", { name: /add async/i }));
 
-    await expect(screen.findByText("3")).resolves.toBeInTheDocument();
+    const nextValue = (currentValue + inputValue).toString();
+
+    await expect(screen.findByText(nextValue)).resolves.toBeInTheDocument();
   });
 
   it("increments if amount is odd", async () => {
-    const store = makeStore();
+    render(<Counter />);
 
-    render(
-      <Provider store={store}>
-        <Counter />
-      </Provider>
-    );
+    const spanCounter = screen.getByTestId(/counter/i);
+    let currentValue = parseInt(spanCounter.textContent ?? "0");
 
     await user.click(screen.getByRole("button", { name: /add if odd/i }));
 
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.getByText(currentValue.toString())).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /increment value/i }));
+    // also increment currentValue by 1
+    currentValue += 1;
+
     await user.type(
       screen.getByLabelText(/set increment amount/i),
       "{backspace}8"
     );
     await user.click(screen.getByRole("button", { name: /add if odd/i }));
 
-    await expect(screen.findByText("9")).resolves.toBeInTheDocument();
+    const inputAmount =
+      screen.getByLabelText<HTMLInputElement>(/set increment amount/i);
+    const inputValue = parseInt(inputAmount.value);
+    const nextValue = (currentValue + inputValue).toString();
+
+    await expect(screen.findByText(nextValue)).resolves.toBeInTheDocument();
   });
 });
