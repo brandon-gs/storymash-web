@@ -19,7 +19,8 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
     "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write",
+    "*.{tsx,ts}": "jest --bail --findRelatedTests"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.3",
