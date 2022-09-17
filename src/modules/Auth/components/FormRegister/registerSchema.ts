@@ -3,7 +3,11 @@ import { literal, object, string, TypeOf } from "zod";
 const registerSchema = object({
   username: string()
     .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
-    .max(10, "El nombre de usuario debe tener al menos 10 caracteres"),
+    .max(10, "El nombre de usuario debe tener al menos 10 caracteres")
+    .regex(
+      new RegExp(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,10}$/gi),
+      "Nombre de usuario no válido"
+    ),
   email: string()
     .min(1, "El correo electrónico es requerido")
     .email("Correo electrónico inválido."),
