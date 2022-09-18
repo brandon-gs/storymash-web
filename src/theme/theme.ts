@@ -14,6 +14,15 @@ const theme = createTheme({
       default: "#f5f6fa",
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          lineHeight: 0,
+        },
+      },
+    },
+  },
 });
 
 export default theme;

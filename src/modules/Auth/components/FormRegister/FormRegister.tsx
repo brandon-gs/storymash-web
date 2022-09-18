@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormCheckbox, FormInput, Link } from "@/core/components";
+import Router from "next/router";
 import registerSchema, { TRegisterSchema } from "./registerSchema";
 
 function FormRegister() {
@@ -29,6 +30,7 @@ function FormRegister() {
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
+      Router.push("/activate-account");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful]);
