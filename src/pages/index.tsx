@@ -1,12 +1,8 @@
 import { FormLogin } from "@/modules/Auth/components";
 import { Counter } from "@/modules/Counter/components";
+import { Container } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
-import styled from "styled-components";
-
-const Container = styled.div`
-  padding: 0 2rem;
-`;
 
 const Home: NextPage = () => {
   return (
