@@ -6,7 +6,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormCheckbox, FormInput, Link } from "@/core/components";
 import Router from "next/router";
-import registerSchema, { TRegisterSchema } from "./registerSchema";
+import { registerSchema, TRegisterSchema } from "./registerSchema";
 
 function FormRegister() {
   const [loading, setLoading] = useState(false);

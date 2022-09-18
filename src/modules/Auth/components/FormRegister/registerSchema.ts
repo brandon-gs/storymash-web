@@ -1,6 +1,6 @@
 import { literal, object, string, TypeOf } from "zod";
 
-const registerSchema = object({
+export const registerSchema = object({
   username: string()
     .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
     .max(10, "El nombre de usuario debe tener al menos 10 caracteres")
@@ -27,5 +27,3 @@ const registerSchema = object({
 });
 
 export type TRegisterSchema = TypeOf<typeof registerSchema>;
-
-export default registerSchema;
