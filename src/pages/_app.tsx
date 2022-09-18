@@ -9,6 +9,8 @@ import { createEmotionCache, theme } from "@/theme";
 import { CssBaseline } from "@mui/material";
 import { persistor, store } from "@/core/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { SnackbarProvider } from "notistack";
+import { SnackbarUtilsConfigurator } from "@/core/utils";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -33,8 +35,14 @@ function MyApp({
             />
           </Head>
           <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
+            <SnackbarProvider
+              maxSnack={3}
+              anchorOrigin={{ horizontal: "right", vertical: "top" }}
+            >
+              <SnackbarUtilsConfigurator />
+              <CssBaseline />
+              <Component {...pageProps} />
+            </SnackbarProvider>
           </ThemeProvider>
         </CacheProvider>
       </PersistGate>

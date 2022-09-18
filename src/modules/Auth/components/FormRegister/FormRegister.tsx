@@ -1,39 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormCheckbox, FormInput, Link } from "@/core/components";
-import Router from "next/router";
+// import Router from "next/router";
 import { registerSchema, TRegisterSchema } from "./registerSchema";
+import { useRegisterMutation } from "../../services";
+import { useAppDispatch, useAppSelector } from "@/core/hooks";
+import {
+  selectActivateEmailErrors,
+  setResetRegisterFormErrors,
+} from "../../store/ActivateEmail/reducers/activateEmailSlice";
+import { IRegisterErrorFields } from "../../store";
 
 function FormRegister() {
-  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const formErrors = useAppSelector(selectActivateEmailErrors);
+  const [register, { isLoading }] = useRegisterMutation();
 
   const methods = useForm<TRegisterSchema>({
     resolver: zodResolver(registerSchema),
   });
 
   const {
-    reset,
+    // reset,
     handleSubmit,
-    formState: { isSubmitSuccessful },
+    setError,
   } = methods;
 
   const onSubmitHandler: SubmitHandler<TRegisterSchema> = (values) => {
-    setLoading(true);
-    console.log(values);
-    setLoading(false);
+    register(values);
   };
 
+  // Show errors from redux state
   useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-      Router.push("/activate-account");
+    for (const field in formErrors) {
+      const fieldName = field as IRegisterErrorFields;
+      if (typeof formErrors[fieldName] === "string") {
+        setError(fieldName, { message: formErrors[fieldName] });
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSubmitSuccessful]);
+  }, [dispatch, setError, formErrors]);
+
+  // Delete form errors from localstorage when components unmount
+  useEffect(() => {
+    dispatch(setResetRegisterFormErrors());
+  }, [dispatch]);
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -106,10 +120,10 @@ function FormRegister() {
               variant="contained"
               fullWidth
               type="submit"
-              loading={loading}
+              loading={isLoading}
               sx={{ mt: "1rem", mb: "1.2rem", py: "0.8rem" }}
             >
-              Crear cuenta
+              <Typography>Crear cuenta</Typography>
             </LoadingButton>
             <Grid container>
               <Grid item xs={12}>
