@@ -36,7 +36,6 @@ const useIntervalCounter = ({
     if (savedTime === null) return null;
     // Get seconds diff from the saved date at localStorage and the current date
     const diff = getSecondsDiff(new Date(parseInt(savedTime)), new Date());
-    console.log(diff);
 
     // If seconds diff is greater than max or less than min then remove it from the localStorage
     const shouldRestart = diff > max || diff < min;
@@ -54,15 +53,28 @@ const useIntervalCounter = ({
     return getTimeFromLocalStorage() ?? initial;
   });
 
-  const saveTime = useCallback(() => {
-    if (id === undefined) return;
-    localStorage.setItem(id, new Date().getTime().toString());
-  }, [id]);
+  const saveTime = useCallback(
+    /**
+     * Allow save the current date when the counter is based
+     * This allow refresh the page and keep the counter value
+     * @param secondsFromCurrentDate allow save the date past from some seconds
+     */
+    (secondsFromCurrentDate = 0) => {
+      if (id === undefined) return;
+      const currentDate = new Date();
+      currentDate.setSeconds(currentDate.getSeconds() - secondsFromCurrentDate);
+      localStorage.setItem(id, currentDate.getTime().toString());
+    },
+    [id]
+  );
 
-  const reset = () => {
-    setTime(resetFrom ?? initial);
-    onReset && onReset();
-  };
+  const reset = useCallback(
+    (valueReset?: number) => {
+      setTime(valueReset ?? resetFrom ?? initial);
+      onReset && onReset();
+    },
+    [initial, onReset, resetFrom]
+  );
 
   useEffect(() => {
     const incrementInterval = setInterval(() => {
