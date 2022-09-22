@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import {
   Avatar,
@@ -20,7 +20,8 @@ import { IRateLimitError } from "@/core/interfaces";
 const ActivateAccountPage = () => {
   // TODO: Add logic to redirect to index page if there isn't an email in redux store
 
-  const { data: user, isLoading } = useGetUserAccountQuery();
+  const { data: user, isLoading, isFetching } = useGetUserAccountQuery();
+  const [sendingEmail, setSendingEmail] = useState<boolean>(false);
 
   const [resendActivationCode, { isSuccess }] =
     useResendActivationCodeMutation();
@@ -36,6 +37,7 @@ const ActivateAccountPage = () => {
 
   const handleResendEmail = async () => {
     try {
+      setSendingEmail(() => true);
       await resendActivationCode().unwrap();
     } catch (_error) {
       const error = _error as IRateLimitError;
@@ -43,6 +45,8 @@ const ActivateAccountPage = () => {
         saveTime(error.data.timeRemain);
         reset(error.data.timeRemain);
       }
+    } finally {
+      setSendingEmail(() => false);
     }
   };
 
@@ -103,7 +107,8 @@ const ActivateAccountPage = () => {
                 variant="contained"
                 size="large"
                 onClick={handleResendEmail}
-                disabled={time !== 0 || isLoading}
+                loading={isLoading || isFetching || sendingEmail}
+                disabled={time !== 0 || user === undefined}
               >
                 <Typography component="span">
                   Reenviar link {time !== 0 ? `en  ${formatSeconds(time)}` : ""}
