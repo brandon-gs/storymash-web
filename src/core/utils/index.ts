@@ -1,2 +1,2 @@
-export { default as dates } from "./dates";
+export * from "./dates";
 export * from "./snackbar";

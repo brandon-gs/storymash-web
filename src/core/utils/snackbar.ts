@@ -28,4 +28,7 @@ export const SnackbarUtils = {
   toast(msg: string, options: OptionsObject = {}) {
     useSnackbarRef.enqueueSnackbar(msg, options);
   },
+  close(key: string) {
+    useSnackbarRef.closeSnackbar(key);
+  },
 };

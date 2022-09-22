@@ -5,15 +5,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormCheckbox, FormInput, Link } from "@/core/components";
-// import Router from "next/router";
 import { registerSchema, TRegisterSchema } from "./registerSchema";
 import { useRegisterMutation } from "../../services";
 import { useAppDispatch, useAppSelector } from "@/core/hooks";
-import {
-  selectActivateEmailErrors,
-  setResetRegisterFormErrors,
-} from "../../store/ActivateEmail/reducers/activateEmailSlice";
-import { IRegisterErrorFields } from "../../store";
+import { IRegisterErrorFields, selectActivateEmailErrors } from "../../store";
 
 function FormRegister() {
   const dispatch = useAppDispatch();
@@ -43,11 +38,6 @@ function FormRegister() {
       }
     }
   }, [dispatch, setError, formErrors]);
-
-  // Delete form errors from localstorage when components unmount
-  useEffect(() => {
-    dispatch(setResetRegisterFormErrors());
-  }, [dispatch]);
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

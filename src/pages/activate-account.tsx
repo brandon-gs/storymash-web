@@ -1,13 +1,29 @@
+import { useEffect } from "react";
 import Head from "next/head";
-import { Avatar, Grid, Container, Typography, Box } from "@mui/material";
+import {
+  Avatar,
+  Grid,
+  Container,
+  Typography,
+  Box,
+  Skeleton,
+} from "@mui/material";
 import { Email as EmailIcon } from "@mui/icons-material";
-import { ButtonBack } from "@/core/components";
 import { LoadingButton } from "@mui/lab";
+import { ButtonBack } from "@/core/components";
 import { useIntervalCounter } from "@/core/hooks";
-import formatSeconds from "@/core/utils/dates";
+import { useResendActivationCodeMutation } from "@/modules/Auth/services";
+import { useGetUserAccountQuery } from "@/core/services/User/userApi";
+import { formatSeconds } from "@/core/utils";
+import { IRateLimitError } from "@/core/interfaces";
 
 const ActivateAccountPage = () => {
   // TODO: Add logic to redirect to index page if there isn't an email in redux store
+
+  const { data: user, isLoading } = useGetUserAccountQuery();
+
+  const [resendActivationCode, { isSuccess }] =
+    useResendActivationCodeMutation();
 
   const { time, reset, saveTime } = useIntervalCounter({
     id: "send_email_activation",
@@ -16,15 +32,30 @@ const ActivateAccountPage = () => {
     min: 0,
     resetFrom: 60,
     max: 60,
-    onMinReached: () => {
-      alert("min reached");
-    },
   });
 
-  const handleResendEmail = () => {
-    saveTime();
-    reset();
+  const handleResendEmail = async () => {
+    try {
+      await resendActivationCode().unwrap();
+    } catch (_error) {
+      const error = _error as IRateLimitError;
+      if (error.status === 429) {
+        saveTime(error.data.timeRemain);
+        reset(error.data.timeRemain);
+      }
+    }
   };
+
+  useEffect(() => {
+    let mounted = true;
+    if (isSuccess && mounted) {
+      saveTime();
+      reset();
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [reset, saveTime, isSuccess]);
 
   return (
     <>
@@ -54,14 +85,17 @@ const ActivateAccountPage = () => {
             <Grid item xs={12} sx={{ mb: 3 }}>
               <Typography component="p" color="gray">
                 Hemos enviado un link para activar tu cuenta a: <br />
-                <Typography
-                  component="span"
-                  fontWeight="bold"
-                  color="primary.dark"
-                >
-                  {/* TODO: Show the email from redux */}
-                  brandongs180@gmail.com
-                </Typography>
+                {user === undefined ? (
+                  <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                ) : (
+                  <Typography
+                    component="span"
+                    fontWeight="bold"
+                    color="primary.dark"
+                  >
+                    {user.account.email}
+                  </Typography>
+                )}
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mb: 4 }}>
@@ -69,7 +103,7 @@ const ActivateAccountPage = () => {
                 variant="contained"
                 size="large"
                 onClick={handleResendEmail}
-                disabled={time !== 0}
+                disabled={time !== 0 || isLoading}
               >
                 <Typography component="span">
                   Reenviar link {time !== 0 ? `en  ${formatSeconds(time)}` : ""}
@@ -81,9 +115,7 @@ const ActivateAccountPage = () => {
                 message="Back to login"
                 href="/"
                 onClick={() =>
-                  alert(
-                    "Should clear the state from the email, time, etc at localstorage"
-                  )
+                  alert("Should logout and clear the session (cookies)")
                 }
               />
             </Grid>

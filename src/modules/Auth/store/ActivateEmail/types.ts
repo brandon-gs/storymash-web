@@ -5,10 +5,6 @@ export interface IActivateEmailState {
   formErrors: Record<IRegisterErrorFields, string | undefined>;
 }
 
-export interface ISetEmailToActiveAction {
-  email: string;
-}
-
 export type IRegisterErrorFields = keyof Pick<
   TRegisterSchema,
   "email" | "username"

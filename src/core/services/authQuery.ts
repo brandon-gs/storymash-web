@@ -10,22 +10,22 @@ import {
  * reference: https://codevoweb.com/react-redux-toolkit-refresh-token-authentication/
  */
 
-export type IRegisterErrorResponse = {
+export type IErrorResponse = {
   message: string;
   field: string;
 };
 
-type IBaseQueryErrors = {
-  data: IRegisterErrorResponse; // Add other type of errors
+type IAuthQueryErrors = {
+  data: IErrorResponse; // Add other type of errors
 };
 
-export const baseQuery = (prefix: string) =>
+export const authQuery = (prefix: string) =>
   fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${prefix}`,
     credentials: "include",
   }) as unknown as BaseQueryFn<
     string | FetchArgs,
     unknown,
-    IBaseQueryErrors,
+    IAuthQueryErrors,
     {}
   >;
