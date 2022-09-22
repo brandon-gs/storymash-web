@@ -22,6 +22,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - [ ] Create page for activate the account
 
+- [ ] Register page
+
+  - [ ] Disable all fields in register page while sending request
+
+- [ ] Activate account page
+
+  - [ ] If the account is already activated redirect to the next step page
+
 - [ ] Create login page
 
   - [ ] Create form login
