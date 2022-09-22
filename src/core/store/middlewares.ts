@@ -29,6 +29,12 @@ export const rtkQueryErrorLogger: Middleware =
 
     // handle api errors
     if (isRejectedWithValue(action)) {
+      // redirect to login page
+      if (payload.originalStatus === 401) {
+        Router.push("/login");
+        return;
+      }
+
       const errorMessage =
         payload.data ??
         payload.data?.message ??
@@ -39,11 +45,6 @@ export const rtkQueryErrorLogger: Middleware =
         preventDuplicate: true,
         key: SNACKBAR_RTK_MIDDLEWARE.error,
       });
-
-      // redirect to login page
-      if (payload.originalStatus === 401) {
-        Router.push("/login");
-      }
     }
 
     return next(action);
