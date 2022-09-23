@@ -31,7 +31,7 @@ export const activateEmailSlice = createSlice({
         // Show an error if it is a field error
         if (payload?.data.field !== undefined) {
           state.formErrors = {
-            ...state.formErrors,
+            ...initialState.formErrors,
             [payload.data.field]: payload.data.message,
           };
         }
