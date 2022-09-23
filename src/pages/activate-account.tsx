@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import {
   Avatar,
@@ -18,12 +18,9 @@ import { formatSeconds } from "@/core/utils";
 import { IRateLimitError } from "@/core/interfaces";
 
 const ActivateAccountPage = () => {
-  // TODO: Add logic to redirect to index page if there isn't an email in redux store
-
   const { data: user, isLoading, isFetching } = useGetUserAccountQuery();
-  const [sendingEmail, setSendingEmail] = useState<boolean>(false);
 
-  const [resendActivationCode, { isSuccess }] =
+  const [resendActivationCode, { isSuccess, isLoading: sendingEmail }] =
     useResendActivationCodeMutation();
 
   const { time, reset, saveTime } = useIntervalCounter({
@@ -37,7 +34,6 @@ const ActivateAccountPage = () => {
 
   const handleResendEmail = async () => {
     try {
-      setSendingEmail(() => true);
       await resendActivationCode().unwrap();
     } catch (_error) {
       const error = _error as IRateLimitError;
@@ -45,8 +41,6 @@ const ActivateAccountPage = () => {
         saveTime(error.data.timeRemain);
         reset(error.data.timeRemain);
       }
-    } finally {
-      setSendingEmail(() => false);
     }
   };
 
@@ -64,7 +58,7 @@ const ActivateAccountPage = () => {
   return (
     <>
       <Head>
-        <title>Storymash | Activar cuenta</title>
+        <title>Storymash | Enviar correo de activación</title>
       </Head>
       <Container maxWidth="sm" sx={{ pb: 2, pt: 5, height: "100%" }}>
         <Grid container component="main" justifyContent="center">
@@ -107,8 +101,10 @@ const ActivateAccountPage = () => {
                 variant="contained"
                 size="large"
                 onClick={handleResendEmail}
-                loading={isLoading || isFetching || sendingEmail}
-                disabled={time !== 0 || user === undefined}
+                loading={sendingEmail}
+                disabled={
+                  time !== 0 || user === undefined || isLoading || isFetching
+                }
               >
                 <Typography component="span">
                   Reenviar link {time !== 0 ? `en  ${formatSeconds(time)}` : ""}

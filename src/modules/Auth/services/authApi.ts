@@ -20,16 +20,26 @@ export const authApi = createApi({
         credentials: "include",
       }),
     }),
-    resendActivationCode: builder.mutation<any, void>({
+    resendActivationCode: builder.mutation<void, void>({
       query: () => ({
         url: "activation-code",
+        method: "POST",
+      }),
+    }),
+    activateAccount: builder.mutation<{}, { code: string }>({
+      query: ({ code }) => ({
+        url: `activate-account?code=${code}`,
         method: "POST",
       }),
     }),
   }),
 });
 
-export const { useRegisterMutation, useResendActivationCodeMutation } = authApi;
+export const {
+  useRegisterMutation,
+  useResendActivationCodeMutation,
+  useActivateAccountMutation,
+} = authApi;
 
 export const {
   endpoints: { register },

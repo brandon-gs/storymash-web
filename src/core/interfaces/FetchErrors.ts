@@ -3,5 +3,6 @@ export interface IRateLimitError {
   data: {
     message: string;
     timeRemain: number;
+    redirect?: string;
   };
 }
