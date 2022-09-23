@@ -13,7 +13,7 @@ const SNACKBAR_RTK_MIDDLEWARE = {
  */
 export const rtkQueryErrorLogger: Middleware =
   // eslint-disable-next-line no-unused-vars
-  (_api: MiddlewareAPI) => (next) => (action) => {
+  (_api: MiddlewareAPI) => (next) => async (action) => {
     const { payload } = action;
     // Handle sucess request
     if (isFulfilled(action)) {
@@ -29,18 +29,28 @@ export const rtkQueryErrorLogger: Middleware =
 
     // handle api errors
     if (isRejectedWithValue(action)) {
+      SnackbarUtils.close(SNACKBAR_RTK_MIDDLEWARE.error);
       // redirect to login page
       if (payload.originalStatus === 401) {
         Router.push("/login");
         return;
       }
 
-      const errorMessage =
-        payload.data ??
-        payload.data?.message ??
-        "Error al conectar con el servidor";
+      if (payload.status === 301) {
+        await Router.push(payload.data.redirect ?? "/");
+        payload.data.message &&
+          SnackbarUtils.success(payload.data.message, {
+            preventDuplicate: true,
+            key: SNACKBAR_RTK_MIDDLEWARE.error,
+          });
+        return;
+      }
 
-      SnackbarUtils.close(SNACKBAR_RTK_MIDDLEWARE.error);
+      const errorMessage =
+        typeof payload.data === "string"
+          ? payload.data
+          : payload.data?.message ?? "Error al conectar con el servidor";
+
       SnackbarUtils.error(errorMessage, {
         preventDuplicate: true,
         key: SNACKBAR_RTK_MIDDLEWARE.error,
