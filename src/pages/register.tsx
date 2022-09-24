@@ -6,7 +6,7 @@ function SignUp() {
   return (
     <>
       <Head>
-        <title>Storymash | Registro</title>
+        <title>Crear cuenta | Storymash</title>
       </Head>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <AuthLayout>

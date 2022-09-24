@@ -20,20 +20,24 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## TODO
 
-- [ ] Create page for activate the account
-
-- [ ] Register page
+- [x] Register page
 
   - [ ] Disable all fields in register page while sending request
 
-- [ ] Activate account page
+- [x] Activate account page
 
-  - [ ] If the account is already activated redirect to the next step page
+  - [x] If the account is already activated redirect to the next step page
 
-- [ ] Create login page
+- [x] Create login page
 
-  - [ ] Create form login
+  - [x] Create form login
   - [ ] Create reducer to save user information after login at redux
+
+- [ ] Create profile complete page
+
+  - [ ] Allow enter your personal information
+    - [ ] name, lastname, birthdate, gender
+    - [ ] allow update an image
 
 - [ ] Create layout
 
@@ -57,3 +61,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [ ] Create page to edit a story
 
 - Profile module
+
+- Error pages
+  - [ ] Create 404 page
+  - [ ] Create 500 page when the api is down

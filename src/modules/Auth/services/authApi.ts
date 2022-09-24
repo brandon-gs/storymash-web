@@ -1,6 +1,7 @@
 import { baseQuery } from "@/core/services";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { TRegisterSchema } from "../components";
+import { ILoginSchema } from "../components/FormLogin/FormLoginSchema";
 
 interface IRegisterResponse {
   message: string;
@@ -20,6 +21,13 @@ export const authApi = createApi({
         credentials: "include",
       }),
     }),
+    login: builder.mutation<ILoginSchema, ILoginSchema>({
+      query: (credentials) => ({
+        url: "login",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     resendActivationCode: builder.mutation<void, void>({
       query: () => ({
         url: "activation-code",
@@ -36,11 +44,12 @@ export const authApi = createApi({
 });
 
 export const {
+  useLoginMutation,
   useRegisterMutation,
   useResendActivationCodeMutation,
   useActivateAccountMutation,
 } = authApi;
 
 export const {
-  endpoints: { register },
+  endpoints: { register, login },
 } = authApi;

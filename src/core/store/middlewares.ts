@@ -32,7 +32,7 @@ export const rtkQueryErrorLogger: Middleware =
       SnackbarUtils.close(SNACKBAR_RTK_MIDDLEWARE.error);
       // redirect to login page
       if (payload.originalStatus === 401) {
-        Router.push("/login");
+        await Router.push("/login");
         return;
       }
 
