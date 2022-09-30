@@ -23,6 +23,7 @@
     "*.{tsx,ts}": "jest --bail --findRelatedTests --passWithNoTests"
   },
   "dependencies": {
+    "@date-io/date-fns-jalali": "^2.16.0",
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
@@ -31,7 +32,9 @@
     "@mui/icons-material": "^5.10.3",
     "@mui/lab": "^5.0.0-alpha.99",
     "@mui/material": "^5.10.5",
+    "@mui/x-date-pickers": "^5.0.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "date-fns": "^2.29.3",
     "next": "12.3.0",
     "notistack": "^2.0.5",
     "react": "18.2.0",
