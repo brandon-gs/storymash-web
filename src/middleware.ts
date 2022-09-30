@@ -9,6 +9,7 @@ const PRIVATE_ROUTES: Record<string, boolean> = {
   "/activation": true,
   "/onboarding/info": true,
   "/onboarding/gender": true,
+  "/onboarding/profile": true,
 };
 
 const PUBLIC_ROUTES: Record<string, boolean> = {
