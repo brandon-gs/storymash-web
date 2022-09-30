@@ -3,6 +3,7 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/dist/query";
+import { Path } from "react-hook-form";
 // import { AppState } from "../store";
 
 /**
@@ -15,8 +16,17 @@ export type IRegisterErrorResponse = {
   field: string;
 };
 
-type IBaseQueryErrors = {
+export type IBaseQueryErrors = {
   data: IRegisterErrorResponse; // Add other type of errors
+};
+
+export type IValidationErrors<ISchema> = {
+  data: {
+    validationErrors: Array<{
+      path: [string, Path<ISchema>];
+      message: string;
+    }>;
+  };
 };
 
 export const baseQuery = (prefix: string) =>
@@ -26,6 +36,6 @@ export const baseQuery = (prefix: string) =>
   }) as unknown as BaseQueryFn<
     string | FetchArgs,
     unknown,
-    IBaseQueryErrors,
+    IBaseQueryErrors | IValidationErrors<any>,
     {}
   >;

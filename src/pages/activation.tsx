@@ -58,7 +58,7 @@ function Activation() {
             </Grid>
             <Grid item xs={12} sx={{ mb: 1 }}>
               <Typography component="h1" variant="h5" fontWeight="bold">
-                {error && "data" in error
+                {error && "data" in error && "message" in error.data
                   ? error.data.message
                   : "Activando cuenta"}
               </Typography>
