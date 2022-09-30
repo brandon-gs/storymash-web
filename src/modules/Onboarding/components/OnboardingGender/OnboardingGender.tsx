@@ -1,31 +1,26 @@
 import { UserGender } from "@/core/interfaces";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
-import { ChangeEvent, FC, useMemo, useState } from "react";
+import { type FC } from "react";
+import { useOnboardingUpdateGenderMutation } from "../../services/onboardingApi";
 import OnboardingOptionGender from "./OnboardingOptionGender/OnboardingOptionGender";
+import useOnboardingGender from "./useOnboardingGender";
 
 const OnboardingGender: FC = () => {
-  const [gender, setGender] = useState<string>("");
-  const [customGender, setCustomGender] = useState<string>("");
+  const [updateGender, { isLoading }] = useOnboardingUpdateGenderMutation();
 
-  const handleSelectGender = (selectedGender: string) => () => {
-    setGender(selectedGender);
+  const {
+    gender,
+    customGender,
+    disableButton,
+    handleChangeCustomGender,
+    handleSelectGender,
+  } = useOnboardingGender();
+
+  const handleUpdateGender = () => {
+    const currentGender = gender === UserGender.other ? customGender : gender;
+    updateGender({ gender: currentGender });
   };
-
-  const handleChangeCustomGender = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setCustomGender(value.replace(/[^a-z]/gi, ""));
-  };
-
-  const disableButton = useMemo(() => {
-    if (gender === UserGender.male || gender === UserGender.female) {
-      return false;
-    }
-    if (gender === UserGender.other && customGender !== "") {
-      return false;
-    }
-    return true;
-  }, [gender, customGender]);
 
   return (
     <Grid container component="main" justifyContent={"center"}>
@@ -88,8 +83,8 @@ const OnboardingGender: FC = () => {
           <LoadingButton
             variant="contained"
             size="large"
-            // onClick={handleResendEmail}
-            // loading={sendingEmail}
+            onClick={handleUpdateGender}
+            loading={isLoading}
             disabled={disableButton}
           >
             <Typography component="span">Continuar</Typography>
