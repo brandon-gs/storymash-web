@@ -17,6 +17,9 @@ export const rtkQueryErrorLogger: Middleware =
     const { payload } = action;
     // Handle sucess request
     if (isFulfilled(action)) {
+      if (payload.redirect) {
+        await Router.push(payload.redirect);
+      }
       const sucessMessage = payload.message ?? payload.data?.message;
       if (typeof sucessMessage === "string") {
         SnackbarUtils.close(SNACKBAR_RTK_MIDDLEWARE.success);
@@ -49,7 +52,11 @@ export const rtkQueryErrorLogger: Middleware =
       const errorMessage =
         typeof payload.data === "string"
           ? payload.data
-          : payload.data?.message ?? "Error al conectar con el servidor";
+          : payload.data?.message
+          ? payload.data.message
+          : payload.data.validationErrors
+          ? "Verifica que los datos sean correctos"
+          : "Error al conectar con el servidor";
 
       SnackbarUtils.error(errorMessage, {
         preventDuplicate: true,
