@@ -35,15 +35,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [ ] Create onboarding process
 
   - [ ] Page for select user personal information (/onboarding/information)
-    - [ ] Create interfaz with name, lastname, birthdate, gender
-    - [ ] Connect with api to save the user's information
-  - [ ] Page for select user gender (/onboarding/gender)
+    - [x] Create interfaz with name, lastname, birthdate
+    - [x] Connect with api to save the user's information
+    - [ ] Disable all fields in while sending request
+  - [x] Page for select user gender (/onboarding/gender)
     - [x] Create interfaz with male, female and custom gender
-    - [ ] Connect with api to save the user's gender
+    - [x] Connect with api to save the user's gender
+    - [ ] Disable all fields in while sending request
   - [ ] Page for customize profile (/onboarding/profile)
     - [ ] upload profile image
     - [ ] send "about me"
     - [ ] Connect with api to save user's image and about
+    - [ ] Disable all fields in while sending request
     - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
 - [ ] Create user wrapper to use at page level
