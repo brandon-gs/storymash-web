@@ -43,8 +43,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - [x] Connect with api to save the user's gender
     - [ ] Disable all fields in while sending request
   - [ ] Page for customize profile (/onboarding/profile)
-    - [ ] upload profile image
-    - [ ] send "about me"
+    - [x] upload profile image
+    - [x] send "about me"
     - [ ] Connect with api to save user's image and about
     - [ ] Disable all fields in while sending request
     - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
