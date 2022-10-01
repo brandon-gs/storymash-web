@@ -1,6 +1,6 @@
 import { authQuery } from "../authQuery";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import type { IUserAccount } from "@/core/store/User";
+import type { IUser, IUserAccount } from "@/core/store/User";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -13,26 +13,17 @@ export const userApi = createApi({
         credentials: "include",
       }),
     }),
-    // register: builder.mutation<IRegisterResponse, TRegisterSchema>({
-    //   query: (user) => ({
-    //     url: "register",
-    //     method: "POST",
-    //     body: user,
-    //     credentials: "include",
-    //   }),
-    // }),
-    // resendActivationCode: builder.mutation<{}, {}>({
-    //   query: () => ({
-    //     url: "activation-code",
-    //     method: "POST",
-    //     // body,
-    //   }),
-    // }),
+    getUser: builder.query<IUser, void>({
+      query: () => ({
+        url: "/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetUserAccountQuery } = userApi;
+export const { useGetUserAccountQuery, useGetUserQuery } = userApi;
 
 export const {
-  endpoints: { getUserAccount },
+  endpoints: { getUserAccount, getUser },
 } = userApi;
