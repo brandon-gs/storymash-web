@@ -9,7 +9,7 @@ function OnboardingInfoPage() {
   return (
     <>
       <Head>
-        <title>Completa tu perfil | Storymash</title>
+        <title>Completa tu información personal | Storymash</title>
       </Head>
       <OnboardingSteps activeStep={0} />
       <Container maxWidth="sm" sx={{ pb: 2, pt: 2, minWidth: 300 }}>
