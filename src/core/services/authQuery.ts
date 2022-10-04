@@ -3,6 +3,7 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/dist/query";
+import fetchFn from "isomorphic-fetch";
 // import { AppState } from "../store";
 
 /**
@@ -23,6 +24,7 @@ export const authQuery = (prefix: string) =>
   fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${prefix}`,
     credentials: "include",
+    fetchFn,
   }) as unknown as BaseQueryFn<
     string | FetchArgs,
     unknown,

@@ -1,8 +1,8 @@
 import { UserGender } from "@/core/interfaces";
+import { useOnboardingUpdateGenderMutation } from "@/core/services";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import { type FC } from "react";
-import { useOnboardingUpdateGenderMutation } from "../../services/onboardingApi";
 import OnboardingOptionGender from "./OnboardingOptionGender/OnboardingOptionGender";
 import useOnboardingGender from "./useOnboardingGender";
 

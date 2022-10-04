@@ -4,6 +4,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/dist/query";
 import { Path } from "react-hook-form";
+import fetchFn from "isomorphic-fetch";
 // import { AppState } from "../store";
 
 /**
@@ -33,6 +34,7 @@ export const baseQuery = (prefix: string) =>
   fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${prefix}`,
     credentials: "include",
+    fetchFn,
   }) as unknown as BaseQueryFn<
     string | FetchArgs,
     unknown,

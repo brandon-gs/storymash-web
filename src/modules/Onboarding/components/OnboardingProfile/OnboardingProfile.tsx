@@ -107,7 +107,7 @@ const OnboardingProfile = () => {
                 placeholder="Escribe sobre ti..."
                 fullWidth
                 name="about"
-                label="Sobre ti"
+                label="Sobre ti (opcional)"
                 variant="outlined"
                 minRows={5}
                 maxRows={5}

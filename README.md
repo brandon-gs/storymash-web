@@ -27,6 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] Activate account page
 
   - [x] If the account is already activated redirect to the next step page
+  - [ ] Refactor ActivateEmail slice and use just the endpoint mutation to show the errors
 
 - [x] Create login page
 
