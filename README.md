@@ -79,5 +79,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Profile module
 
 - Error pages
+
   - [ ] Create 404 page
   - [ ] Create 500 page when the api is down
+
+- Refactors
+  - [ ] Refactor form inputs form Controller component to useController hook
