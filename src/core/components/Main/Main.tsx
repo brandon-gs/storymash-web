@@ -7,7 +7,7 @@ import NavbarDrawerHeader from "../Navbar/NavbarDrawerHeader/NavbarDrawerHeader"
 
 const StyledMain = styled("main", {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme }) => ({
+})<{ open: boolean }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
   transition: theme.transitions.create("margin", {
@@ -15,6 +15,13 @@ const StyledMain = styled("main", {
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: 0,
+  ...(open && {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: `${DRAWER_WIDTH}px`,
+  }),
 }));
 
 /**
@@ -28,19 +35,7 @@ const Main: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <NavbarDrawerHeader />
-      <StyledMain
-        sx={(theme) => ({
-          ...(drawer.open && {
-            transition: theme.transitions.create("margin", {
-              easing: theme.transitions.easing.easeOut,
-              duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: `${DRAWER_WIDTH}px`,
-          }),
-        })}
-      >
-        {children}
-      </StyledMain>
+      <StyledMain open={drawer.open}>{children}</StyledMain>
     </>
   );
 };

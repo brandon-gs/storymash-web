@@ -18,7 +18,6 @@ interface INavbarDrawerItem {
 interface INavbarDrawerItemsProps {
   open: boolean;
   items: INavbarDrawerItem[];
-  handleCloseDrawer: () => void;
 }
 
 const NavbarDrawerItems: FC<INavbarDrawerItemsProps> = ({ open, items }) => {

@@ -44,7 +44,6 @@ const NavbarDrawer: FC<INavbarDrawerProps> = ({ open, handleDrawerClose }) => {
       <Divider />
       <NavbarDrawerItems
         open={open}
-        handleCloseDrawer={handleDrawerClose}
         items={[
           {
             label: "Inicio",

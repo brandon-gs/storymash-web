@@ -39,7 +39,11 @@ interface INavbarAppbarProps {
 
 const NavbarAppbar: FC<INavbarAppbarProps> = ({ open, handleDrawerOpen }) => {
   return (
-    <StyledAppBar position="fixed" open={open}>
+    <StyledAppBar
+      position="fixed"
+      open={open}
+      sx={{ backgroundColor: "white", color: "black", boxShadow: 1 }}
+    >
       <Toolbar>
         <IconButton
           color="inherit"
@@ -47,7 +51,7 @@ const NavbarAppbar: FC<INavbarAppbarProps> = ({ open, handleDrawerOpen }) => {
           onClick={handleDrawerOpen}
           edge="start"
           sx={{
-            marginRight: 5,
+            marginRight: 3,
             ...(open && { display: "none" }),
           }}
         >

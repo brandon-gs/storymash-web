@@ -13,7 +13,6 @@ export { default as Navbar } from "./Navbar/Navbar";
 export { default as NavbarAppbar } from "./Navbar/NavbarAppbar/NavbarAppbar";
 export { default as NavbarDrawer } from "./Navbar/NavbarDrawer/NavbarDrawer";
 export { default as NavbarDrawerItems } from "./Navbar/NavbarDrawer/NavbarDrawerItems";
-export * from "./Navbar/NavbarDrawer/NavbarDrawerMixins";
 export { default as NavbarDrawerHeader } from "./Navbar/NavbarDrawerHeader/NavbarDrawerHeader";
 export { default as QontoConnector } from "./QontoConnector/QontoConnector";
 export { default as QontoStepIcon } from "./QontoStepIcon/QontoStepIcon";

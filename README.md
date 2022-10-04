@@ -46,7 +46,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [ ] Page for customize profile (/onboarding/profile)
     - [x] upload profile image
     - [x] send "about me"
-    - [ ] Connect with api to save user's image and about
+    - [x] Connect with api to save user's image and about
     - [ ] Disable all fields in while sending request
     - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
@@ -86,3 +86,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Refactors
   - [ ] Refactor form inputs form Controller component to useController hook
+  - [ ] Remove redux persist
