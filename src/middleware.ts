@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const PRIVATE_ROUTES: Record<string, boolean> = {
-  "/": true,
   "/activate-account": true,
-  "/profile": true,
   "/activation": true,
   "/onboarding/info": true,
   "/onboarding/gender": true,
   "/onboarding/profile": true,
+  "/profile": true,
+  "/stories": true,
 };
 
 const PUBLIC_ROUTES: Record<string, boolean> = {
@@ -48,9 +48,13 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(data.redirect, request.url));
     }
 
-    return isPrivateRoute
-      ? NextResponse.next()
-      : NextResponse.redirect(new URL("/", request.url));
+    const userRedirect = getUserRedirectPage(data.user, pathname);
+
+    if (userRedirect === pathname) {
+      return NextResponse.next();
+    }
+
+    return NextResponse.redirect(new URL(userRedirect, request.url));
   } catch (error) {
     return isPublicRoute
       ? NextResponse.next()
@@ -71,3 +75,42 @@ const getValidationToken = async (jwtToken: string) => {
 
   return await response.json();
 };
+
+interface User {
+  account: {
+    isDeleted: boolean;
+    isActivate: boolean;
+    onboardingComplete: boolean;
+  };
+  profile: {
+    gender: string;
+  };
+}
+
+export function getUserRedirectPage(user: User, pathname: string) {
+  if (!user) {
+    return "/";
+  }
+
+  const { account } = user;
+
+  if (account.isDeleted) {
+    return "/";
+  }
+
+  if (pathname === "/") {
+    return "/stories";
+  }
+
+  const isActivationPathname =
+    pathname === "/activate-account" || pathname === "/activation";
+
+  if (account.isActivate && isActivationPathname) {
+    return "/stories";
+  }
+
+  if (account.onboardingComplete && pathname.includes("onboarding")) {
+    return "/stories";
+  }
+  return pathname;
+}
