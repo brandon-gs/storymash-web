@@ -1,7 +1,11 @@
 import { authQuery } from "../authQuery";
 import { createApi } from "@reduxjs/toolkit/query/react";
 // import { RTKTags } from "@/core/store";
-import type { IUser, IUserAccount } from "./userApiTypes";
+import type {
+  IOnboardingProfileRequest,
+  IUser,
+  IUserAccount,
+} from "./userApiTypes";
 import type { IOnboardingInfoFormSchema } from "@/modules/Onboarding/components";
 
 export const userApi = createApi({
@@ -40,6 +44,13 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    onboardingUpdateProfile: builder.mutation<void, IOnboardingProfileRequest>({
+      query: (body) => ({
+        url: "onboarding/profile",
+        method: "PUT",
+        body: body,
+      }),
+    }),
   }),
 });
 
@@ -48,6 +59,7 @@ export const {
   useGetUserQuery,
   useOnboardingUpdateGenderMutation,
   useOnboardingUpdateInfoMutation,
+  useOnboardingUpdateProfileMutation,
 } = userApi;
 
 export const {
@@ -56,5 +68,6 @@ export const {
     getUser,
     onboardingUpdateGender,
     onboardingUpdateInfo,
+    onboardingUpdateProfile,
   },
 } = userApi;

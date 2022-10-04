@@ -25,3 +25,7 @@ export const SchemaUser = z.object({
 export type IUserAccount = z.infer<typeof SchemaUserAccount>;
 export type IUserProfile = z.infer<typeof SchemaUserProfile>;
 export type IUser = z.infer<typeof SchemaUser>;
+
+// Query and Mutations Types
+
+export type IOnboardingProfileRequest = FormData;

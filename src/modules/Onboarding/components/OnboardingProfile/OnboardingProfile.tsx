@@ -3,10 +3,14 @@ import {
   FormInput,
   FormInputFileButton,
 } from "@/core/components";
-import { useGetUserQuery } from "@/core/services/User/userApi";
+import {
+  useGetUserQuery,
+  useOnboardingUpdateProfileMutation,
+} from "@/core/services/User/userApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -15,7 +19,13 @@ import {
 } from "./OnboardingProfileSchema";
 
 const OnboardingProfile = () => {
+  const router = useRouter();
+
   const { data: user, ...userQuery } = useGetUserQuery();
+  const [
+    onboardingUpdateProfile,
+    { isLoading: isOnboardingUpdateProfileLoading, isSuccess },
+  ] = useOnboardingUpdateProfileMutation();
 
   const [hasValueToSend, setHasValueToSend] = useState<boolean>(false);
   const methods = useForm<IOnboardingProfileSchema>({
@@ -33,6 +43,11 @@ const OnboardingProfile = () => {
 
   const onSubmitHandler: SubmitHandler<IOnboardingProfileSchema> = (values) => {
     console.log(values);
+    console.log(values);
+    const body = new FormData();
+    body.append("about", values.about);
+    body.append("image", values.image ? values.image[0] : undefined);
+    onboardingUpdateProfile(body);
   };
 
   const undoImageSelected = () => {
@@ -53,6 +68,12 @@ const OnboardingProfile = () => {
     const hasAbout = Boolean(about);
     setHasValueToSend(hasImage || hasAbout);
   }, [about, image]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push("/stories");
+    }
+  }, [router, isSuccess]);
 
   return (
     <FormProvider {...methods}>
@@ -124,6 +145,7 @@ const OnboardingProfile = () => {
                   variant="contained"
                   disabled={!isValid || !hasValueToSend}
                   sx={{ ml: 2 }}
+                  loading={isOnboardingUpdateProfileLoading}
                 >
                   <Typography>Continuar</Typography>
                 </LoadingButton>
