@@ -1,8 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Storymash web
 
 ## Getting Started
 
-First, run the development server:
+First, install all the packages
+
+```bash
+yarn install
+```
+
+After run the development server:
 
 ```bash
 npm run dev
@@ -12,23 +18,72 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## TODO
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- [x] Register page
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  - [ ] Disable all fields in register page while sending request
 
-## Learn More
+- [x] Activate account page
 
-To learn more about Next.js, take a look at the following resources:
+  - [x] If the account is already activated redirect to the next step page
+  - [ ] Refactor ActivateEmail slice and use just the endpoint mutation to show the errors
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [x] Create login page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  - [x] Create form login
 
-## Deploy on Vercel
+- [ ] Create onboarding process
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - [ ] Page for select user personal information (/onboarding/information)
+    - [x] Create interfaz with name, lastname, birthdate
+    - [x] Connect with api to save the user's information
+    - [ ] Disable all fields in while sending request
+  - [x] Page for select user gender (/onboarding/gender)
+    - [x] Create interfaz with male, female and custom gender
+    - [x] Connect with api to save the user's gender
+    - [ ] Disable all fields in while sending request
+  - [ ] Page for customize profile (/onboarding/profile)
+    - [x] upload profile image
+    - [x] send "about me"
+    - [x] Connect with api to save user's image and about
+    - [ ] Disable all fields in while sending request
+    - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [ ] Create user wrapper to use at page level
+
+  - [ ] get user information and store it in redux
+
+  - [ ] Allow enter your personal information
+
+- [ ] Create layout
+
+  - [ ] Create navbar
+  - [ ] Create sidebar
+
+- [ ] Stories module
+
+  - [ ] Create page to read all stories "/"
+  - [ ] Create page to create a story
+  - [ ] Create page to read one story
+    - [ ] Show story with pagination for the chapters
+    - [ ] Add a comment
+    - [ ] If I'm the owner I can:
+      - [ ] Delete the story
+        - [ ] Create modal to delete a story asking if user is sure
+      - [ ] Edit one chapter of the story
+    - [ ] If I'm not the owner I can:
+      - [ ] Add it to favorites
+      - [ ] Like any chapter of the story
+  - [ ] Create page to edit a story
+
+- Profile module
+
+- Error pages
+
+  - [ ] Create 404 page
+  - [ ] Create 500 page when the api is down
+
+- Refactors
+  - [ ] Refactor form inputs form Controller component to useController hook
+  - [ ] Remove redux persist

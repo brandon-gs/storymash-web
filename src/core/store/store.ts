@@ -8,15 +8,17 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
+  RehydrateAction,
 } from "redux-persist";
+import { rtkQueryErrorLogger } from "./middlewares";
 
-import reducers from "./reducers";
+import reducers, { storeMiddlewares, whitelist } from "./reducers";
 import storage from "./storage";
 
 const persistConfig = {
   key: "primary",
   storage,
-  whitelist: [], // place to select which state you want to persist
+  whitelist, // place to select which state you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -29,7 +31,9 @@ export function makeStore() {
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat([]),
+      })
+        .concat(rtkQueryErrorLogger)
+        .concat(storeMiddlewares),
   });
   const _persistor = persistStore(_store);
 
@@ -48,3 +52,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+
+// Rehydarte action type
+export interface IRehydrateAppAction extends RehydrateAction {
+  payload?: AppState;
+}

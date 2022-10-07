@@ -19,23 +19,31 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
     "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write",
-    "*.{tsx,ts}": "jest --bail --findRelatedTests"
+    "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write",
+    "*.{tsx,ts}": "jest --bail --findRelatedTests --passWithNoTests"
   },
   "dependencies": {
+    "@date-io/date-fns-jalali": "^2.16.0",
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.8",
     "@mui/icons-material": "^5.10.3",
+    "@mui/lab": "^5.0.0-alpha.99",
     "@mui/material": "^5.10.5",
+    "@mui/x-date-pickers": "^5.0.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "date-fns": "^2.29.3",
+    "isomorphic-fetch": "^3.0.0",
     "next": "12.3.0",
+    "notistack": "^2.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.35.0",
     "react-redux": "^8.0.2",
     "redux-persist": "^6.0.0",
-    "styled-components": "^5.3.5"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
@@ -50,12 +58,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/isomorphic-fetch": "^0.0.36",
     "@types/jest": "^29.0.1",
     "@types/node": "18.7.17",
     "@types/react": "^18.0.19",
     "@types/react-dom": "18.0.6",
     "@types/react-redux": "^7.1.24",
-    "@types/styled-components": "^5.1.26",
     "babel-loader": "^8.2.5",
     "cypress": "^10.7.0",
     "eslint": "8.23.1",

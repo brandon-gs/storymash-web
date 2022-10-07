@@ -7,10 +7,29 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#4b89da",
+      main: "#584FB2",
+      contrastText: "#FFFFFF",
+    },
+    secondary: {
+      main: "#4f6eb2",
+      // main: "#b24f77",
+      contrastText: "#FFFFFF",
+    },
+    success: {
+      main: "#76c893",
+      contrastText: "#FFFFFF",
     },
     background: {
       default: "#f5f6fa",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          lineHeight: 0,
+        },
+      },
     },
   },
 });
