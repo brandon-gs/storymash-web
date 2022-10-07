@@ -30,6 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
+      - run: ls
       - run: cd ./storymash-api && npm ci
 
       - name: Use Node.js ${{ matrix.node-version }}
