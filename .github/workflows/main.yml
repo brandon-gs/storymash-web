@@ -18,17 +18,11 @@ jobs:
       - name: Clone web repo
         uses: actions/checkout@v3
 
-      - run: cd .. && ls
-      - run: ls
-
       - name: Clone api server
         uses: actions/checkout@v3
         with:
           repository: brandon-gs/storymash-api
           path: storymash-api
-
-      - run: cd .. && ls
-      - run: ls
 
       - name: Use Node.js ${{ matrix.node-version }} for the api server
         uses: actions/setup-node@v3
@@ -37,6 +31,7 @@ jobs:
           cache: "npm"
 
       - run: cd ./storymash-api && npm ci
+      - run: cd ./storymash-api && npm start
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
