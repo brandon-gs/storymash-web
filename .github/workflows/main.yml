@@ -34,6 +34,7 @@ jobs:
           cache: "npm"
 
       - run: cd .. && ls
+      - run: ls
       - run: cd ./storymash-api && npm ci
 
       - name: Use Node.js ${{ matrix.node-version }}
