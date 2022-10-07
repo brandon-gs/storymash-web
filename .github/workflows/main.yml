@@ -20,17 +20,16 @@ jobs:
         with:
           repository: brandon-gs/storymash-api
           path: storymash-api
-        working-directory: ./storymash-api
 
       - name: Use Node.js ${{ matrix.node-version }} for the api server
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+
+      - run: cd storymash-api && npm ci
 
       - name: Clone web repo
-        working-directory: ./
         uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
