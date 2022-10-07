@@ -15,6 +15,12 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: Clone api server
+        uses: actions/checkout@v3
+        with:
+          repository: brandon-gs/storymash-api
+          path: storymash-api
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
