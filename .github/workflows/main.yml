@@ -21,6 +21,9 @@ jobs:
           repository: brandon-gs/storymash-api
           path: storymash-api
 
+      - run: cd .. && ls
+      - run: ls
+
       - name: Clone web repo
         uses: actions/checkout@v3
 
