@@ -15,6 +15,12 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: Clone web repo
+        uses: actions/checkout@v3
+
+      - run: cd .. && ls
+      - run: ls
+
       - name: Clone api server
         uses: actions/checkout@v3
         with:
@@ -24,17 +30,12 @@ jobs:
       - run: cd .. && ls
       - run: ls
 
-      - name: Clone web repo
-        uses: actions/checkout@v3
-
       - name: Use Node.js ${{ matrix.node-version }} for the api server
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - run: cd .. && ls
-      - run: ls
       - run: cd ./storymash-api && npm ci
 
       - name: Use Node.js ${{ matrix.node-version }}
