@@ -112,5 +112,11 @@ export function getUserRedirectPage(user: User, pathname: string) {
   if (account.onboardingComplete && pathname.includes("onboarding")) {
     return "/stories";
   }
+
+  const isPublicRoute = PUBLIC_ROUTES[pathname];
+  if (isPublicRoute) {
+    return "/stories";
+  }
+
   return pathname;
 }
