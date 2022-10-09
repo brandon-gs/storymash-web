@@ -1,7 +1,7 @@
-import { Avatar, Box, Grid, Link, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
 import { type ILoginSchema, loginSchema } from "./FormLoginSchema";
 import { LoadingButton } from "@mui/lab";
-import { FormInput } from "@/core/components";
+import { FormInput, Link } from "@/core/components";
 import { type SubmitHandler, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
