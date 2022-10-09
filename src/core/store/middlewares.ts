@@ -17,6 +17,7 @@ export const rtkQueryErrorLogger: Middleware =
     const { payload } = action;
     // Handle sucess request
     if (isFulfilled(action)) {
+      if (!payload) return next(action);
       if (payload.redirect) {
         await Router.push(payload.redirect);
       }
@@ -39,7 +40,7 @@ export const rtkQueryErrorLogger: Middleware =
         return;
       }
 
-      if (payload.status === 301) {
+      if (payload.status === 301 || payload.status === 307) {
         await Router.push(payload.data.redirect ?? "/");
         payload.data.message &&
           SnackbarUtils.success(payload.data.message, {
