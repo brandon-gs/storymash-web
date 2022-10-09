@@ -24,6 +24,7 @@ export const authQuery = (prefix: string) =>
   fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${prefix}`,
     credentials: "include",
+    mode: "cors",
     fetchFn,
   }) as unknown as BaseQueryFn<
     string | FetchArgs,
