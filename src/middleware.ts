@@ -45,6 +45,11 @@ export async function middleware(request: NextRequest) {
     const data = await getValidationToken(jwtToken);
 
     if (typeof data.redirect === "string" && data.redirect !== pathname) {
+      const isActivationPathname =
+        pathname === "/activate-account" || pathname === "/activation";
+      if (!data.user.account.isActivate && isActivationPathname) {
+        return NextResponse.next();
+      }
       return NextResponse.redirect(new URL(data.redirect, request.url));
     }
 
