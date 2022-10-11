@@ -43,7 +43,28 @@ jobs:
 
       - name: Start server api
         env:
-          JWT_ACCESS_SECRET: ${{ secrets.JWT_ACCESS_SECRET }}
+          MONGO_URI: mongodb://localhost:27017/storymash-test
+          EMAIL_SERVICE: mail
+          EMAIL_USER: user
+          EMAIL_PASSWORD: password
+          EMAIL_HOST: http://localhost:3000
+          EMAIL_RESEND_ACTIVATION_EMAIL_LIMIT: 100
+          OAUTH_CLIENT_ID: oauth_client_id
+          OAUTH_CLIENT_SECRET: oauth_client_secret
+          OUAHT_REFRESH_TOKEN: oatuh_refresh_token
+          USER_MALE_IMAGE_URL: https://res.cloudinary.com/dsyibmoda/image/upload/v1653351495/PngItem_1370018_zt8p1l.png
+          USER_FEMALE_IMAGE_URL: https://res.cloudinary.com/dsyibmoda/image/upload/v1653351495/PngItem_1370018_zt8p1l.png
+          USER_NO_GENDER_IMAGE_URL: https://res.cloudinary.com/dsyibmoda/image/upload/v1653351495/PngItem_1370018_zt8p1l.png
+          JWT_ACCESS_SECRET: jwtSecret
+          JWT_REFRESH_SECRET: refreshSecret
+          ACCESS_EXP: 9000000
+          REFRESH_EXP: 3600000
+          COOKIE_ACCESS_NAME: access_token
+          COOKIE_REFRESH_NAME: refresh_token
+          CLOUDINARY_NAME: cloudinary_name
+          CLOUDINARY_API_KEY: cloudinary_api_key
+          CLOUDINARY_API_SECRET: cloudinary_api_scret
+
         run: cd ./storymash-api && npm run start:test &
 
       - name: Go back to root folder
