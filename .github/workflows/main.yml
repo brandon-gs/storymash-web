@@ -19,6 +19,8 @@ jobs:
       - name: Clone web repo
         uses: actions/checkout@v3
 
+      - run: cd ..
+
       - name: Clone api server
         uses: actions/checkout@v3
         with:
@@ -45,7 +47,7 @@ jobs:
         run: cd ./storymash-api && npm start &
 
       - name: Go back to root folder
-        run: cd ..
+        run: cd .. && cd ..
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
