@@ -17,10 +17,13 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
     "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write",
-    "*.{tsx,ts}": "jest --bail --findRelatedTests --passWithNoTests"
+    "*.{js,ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx}": [
+      "bash -c 'tsc --noEmit'",
+      "jest --bail --findRelatedTests --passWithNoTests",
+      "cypress run"
+    ]
   },
   "dependencies": {
     "@date-io/date-fns-jalali": "^2.16.0",
