@@ -44,7 +44,7 @@ jobs:
       - name: Start server api
         env:
           JWT_ACCESS_SECRET: ${{ secrets.JWT_ACCESS_SECRET }}
-        run: cd ./storymash-api && npm start &
+        run: cd ./storymash-api && npm start:test &
 
       - name: Go back to root folder
         run: cd .. && cd ..
