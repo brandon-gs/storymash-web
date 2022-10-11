@@ -19,8 +19,6 @@ jobs:
       - name: Clone web repo
         uses: actions/checkout@v3
 
-      - run: cd ..
-
       - name: Clone api server
         uses: actions/checkout@v3
         with:
@@ -65,10 +63,10 @@ jobs:
           CLOUDINARY_API_KEY: cloudinary_api_key
           CLOUDINARY_API_SECRET: cloudinary_api_scret
 
-        run: cd ./storymash-api && npm run start:test &
+        run: cd ./storymash-api && npm run start:test | sleep 10 &
 
       - name: Go back to root folder
-        run: cd .. && cd ..
+        run: cd ..
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
