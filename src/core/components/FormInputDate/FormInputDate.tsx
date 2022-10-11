@@ -1,9 +1,12 @@
 import { useRef, type FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker, type MobileDatePickerProps } from "@mui/x-date-pickers";
+import {
+  DatePicker,
+  LocalizationProvider,
+  type MobileDatePickerProps,
+} from "@mui/x-date-pickers";
 import { TextField, buttonBaseClasses } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { es } from "date-fns/locale";
 
 type IFormInputDateProps = {
@@ -45,6 +48,7 @@ const FormInputDate: FC<IFormInputDateProps> = ({ name, ...otherProps }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
+                name={name}
                 inputProps={{
                   ...params.inputProps,
                   placeholder: "día/mes/año",
