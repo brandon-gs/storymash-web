@@ -87,3 +87,35 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Refactors
   - [ ] Refactor form inputs form Controller component to useController hook
   - [ ] Remove redux persist
+
+## Cypress
+
+To run cypress tests is required to have the next dependencies:
+
+- node
+- [storymash-api repo](https://github.com/brandon-gs/storymash-api) or url for the development env
+- [docker](https://docs.docker.com/engine/install/debian/#set-up-the-repository)
+- [docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-debian-10)
+- [mongodb]
+
+Execute the following steps
+
+1. Start the storymash-api or config .env with the url of the api test server
+
+```bash
+# /storymash-api
+yarn start:test
+```
+
+2. Build the web client and start the server
+
+```bash
+yarn build
+yarn start
+```
+
+3. Open cypress and run tests
+
+```bash
+yarn cypress
+```

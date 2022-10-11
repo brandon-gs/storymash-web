@@ -1,0 +1,16 @@
+{
+  "extends": ["eslint:recommended", "prettier", "plugin:cypress/recommended"],
+  "rules": {
+    "no-unused-vars": 0,
+    "cypress/no-unnecessary-waiting": 0,
+    "import/no-anonymous-default-export": 0
+  },
+  "overrides": [
+    {
+      "files": ["**/*.cy.tsx", "**/*.cy.ts"],
+      "env": {
+        "mocha": true
+      }
+    }
+  ]
+}
