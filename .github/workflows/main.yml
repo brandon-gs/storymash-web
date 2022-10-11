@@ -65,6 +65,9 @@ jobs:
 
         run: cd ./storymash-api && npm run start:test &
 
+      - name: Testing api
+        run: cd ./storymash-api && npm test
+
       - name: Go back to root folder
         run: cd ..
 
