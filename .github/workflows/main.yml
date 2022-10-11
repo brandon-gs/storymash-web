@@ -36,10 +36,8 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
 
-      - run: cd ./storymash-api
-
       - name: Install server api dependencies
-        run: npm ci
+        run: cd ./storymash-api && npm ci
 
       - name: Start server api
         env:
@@ -65,7 +63,7 @@ jobs:
           CLOUDINARY_API_KEY: cloudinary_api_key
           CLOUDINARY_API_SECRET: cloudinary_api_scret
 
-        run: ls && npm run start:test
+        run: cd ./storymash-api && npm run start:test | sleep 10
 
       - name: Go back to root folder
         run: cd ..
