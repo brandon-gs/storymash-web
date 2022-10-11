@@ -112,6 +112,7 @@ function FormRegister() {
               type="submit"
               loading={isLoading}
               sx={{ mt: "1rem", mb: "1.2rem", py: "0.8rem" }}
+              data-cy="submit"
             >
               <Typography>Crear cuenta</Typography>
             </LoadingButton>
