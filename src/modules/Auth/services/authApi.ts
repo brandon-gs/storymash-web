@@ -28,6 +28,12 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+    }),
     resendActivationCode: builder.mutation<void, void>({
       query: () => ({
         url: "activation-code",
@@ -48,8 +54,9 @@ export const {
   useRegisterMutation,
   useResendActivationCodeMutation,
   useActivateAccountMutation,
+  useLogoutMutation,
 } = authApi;
 
 export const {
-  endpoints: { register, login },
+  endpoints: { register, login, logout, activateAccount, resendActivationCode },
 } = authApi;
