@@ -18,6 +18,7 @@ export const userApi = createApi({
         url: "/",
         method: "GET",
       }),
+      keepUnusedDataFor: 300,
       providesTags: ["User"],
     }),
     getUserAccount: builder.query<{ account: IUserAccount }, void>({
@@ -50,6 +51,7 @@ export const userApi = createApi({
         method: "PUT",
         body: body,
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
