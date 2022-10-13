@@ -19,6 +19,16 @@ const theme = createTheme({
       main: "#76c893",
       contrastText: "#FFFFFF",
     },
+    black: {
+      dark: "#20252e",
+      main: "#2f3542",
+      light: "#57606f",
+    },
+    pink: {
+      light: "#f586e6",
+      main: "#f368e0",
+      dark: "#aa489c",
+    },
     background: {
       default: "#f5f6fa",
     },
@@ -33,5 +43,17 @@ const theme = createTheme({
     },
   },
 });
+
+declare module "@mui/material/styles" {
+  export interface Palette {
+    black: Palette["primary"];
+    pink: Palette["primary"];
+  }
+
+  export interface PaletteOptions {
+    black: PaletteOptions["primary"];
+    pink: PaletteOptions["primary"];
+  }
+}
 
 export default theme;
