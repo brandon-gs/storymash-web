@@ -12,7 +12,10 @@ import { Email as EmailIcon } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { ButtonBack } from "@/core/components";
 import { useIntervalCounter } from "@/core/hooks";
-import { useResendActivationCodeMutation } from "@/modules/Auth/services";
+import {
+  useLogoutMutation,
+  useResendActivationCodeMutation,
+} from "@/modules/Auth/services";
 import { useGetUserAccountQuery } from "@/core/services/User/userApi";
 import { formatSeconds } from "@/core/utils";
 import { IRateLimitError } from "@/core/interfaces";
@@ -22,6 +25,8 @@ const ActivateAccountPage = () => {
 
   const [resendActivationCode, { isSuccess, isLoading: sendingEmail }] =
     useResendActivationCodeMutation();
+
+  const [logout, { ...logoutMutation }] = useLogoutMutation();
 
   const { time, reset, saveTime } = useIntervalCounter({
     id: "send_email_activation",
@@ -115,9 +120,8 @@ const ActivateAccountPage = () => {
               <ButtonBack
                 message="Back to login"
                 href="/"
-                onClick={() =>
-                  alert("Should logout and clear the session (cookies)")
-                }
+                onClick={logout}
+                isLoading={logoutMutation.isLoading}
               />
             </Grid>
           </Box>
