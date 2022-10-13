@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Head from "next/head";
 import { Navbar, Main } from "@/core/components";
+import { StoryList } from "@/modules/Stories/components";
 
 const StoriesPage: FC = () => {
   return (
@@ -10,7 +11,7 @@ const StoriesPage: FC = () => {
       </Head>
       <Navbar />
       <Main>
-        <h1>Historias</h1>
+        <StoryList />
       </Main>
     </>
   );

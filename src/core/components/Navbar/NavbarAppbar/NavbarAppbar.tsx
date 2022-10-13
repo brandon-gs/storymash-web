@@ -42,7 +42,7 @@ const NavbarAppbar: FC<INavbarAppbarProps> = ({ open, handleDrawerOpen }) => {
     <StyledAppBar
       position="fixed"
       open={open}
-      sx={{ backgroundColor: "white", color: "black", boxShadow: 1 }}
+      sx={{ backgroundColor: "white", color: "black.main", boxShadow: 1 }}
     >
       <Toolbar>
         <IconButton

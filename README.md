@@ -96,14 +96,45 @@ yarn cypress
 
   - [ ] Allow enter your personal information
 
-- [ ] Create layout
+- [] Create layout
 
-  - [ ] Create navbar
-  - [ ] Create sidebar
+  - [x] Create navbar
+    - [ ] Add "Crear historia" element
+    - [ ] Add "Notifications" element
+    - [ ] Add User avatar with username
+      - [ ] Redirect to the User profile
+  - [x] Create sidebar
+    - [ ] Sub menu
+      - [ ] Add "Mis historias" element
+    - [ ] Sub menu
+      - [ ] Add "Ajustes" element
+      - [ ] Add "Ayuda y Feedback" element
+      - [ ] Add "Cerrar sesión" element
 
 - [ ] Stories module
 
-  - [ ] Create page to read all stories "/"
+  - [ ] Read all stories /stories
+
+    - [x] Create page to read all stories
+    - [x] Add stories service
+    - [x] Create StoryCard component
+    - [x] Create StoryList component
+      - [ ] Refactor to get stories from props
+      - [ ] Add masonry layout for the stories
+    - [ ] Add pagination feature
+    - [ ] Add form or button to start to create a story
+
+  - [ ] Story like
+
+    - [x] Create StoryLike component
+    - [x] Disable button if the user is the author
+    - [ ] Like it
+      - [ ] Create service to add a like to a story
+      - [ ] Use optimistic update to update likes before the service response
+    - [ ] Remove like
+      - [ ] Create service to remove a like to a story
+      - [ ] Use optimistic update to update likes before the service response
+
   - [ ] Create page to create a story
   - [ ] Create page to read one story
     - [ ] Show story with pagination for the chapters
@@ -116,6 +147,8 @@ yarn cypress
       - [ ] Add it to favorites
       - [ ] Like any chapter of the story
   - [ ] Create page to edit a story
+  - [ ] Favorite stories
+    - [ ] Refactor StoryList to allow get stories from props
 
 - Profile module
 
