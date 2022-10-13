@@ -1,15 +1,21 @@
 import { FC } from "react";
-import { Button } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import { LoadingButton } from "@mui/lab";
 
 interface ButtonBackProps {
   message: string;
   href: string;
   onClick?: Function;
+  isLoading?: boolean;
 }
 
-const ButtonBack: FC<ButtonBackProps> = ({ message, href, onClick }) => {
+const ButtonBack: FC<ButtonBackProps> = ({
+  message,
+  href,
+  onClick,
+  isLoading = false,
+}) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -18,9 +24,13 @@ const ButtonBack: FC<ButtonBackProps> = ({ message, href, onClick }) => {
   };
 
   return (
-    <Button startIcon={<ArrowBack />} onClick={handleClick}>
+    <LoadingButton
+      startIcon={<ArrowBack />}
+      onClick={handleClick}
+      loading={isLoading}
+    >
       <span>{message}</span>
-    </Button>
+    </LoadingButton>
   );
 };
 export default ButtonBack;
