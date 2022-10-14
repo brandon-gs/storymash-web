@@ -21,7 +21,7 @@ const StoryCard: FC<StoryCardProps> = ({ story }) => {
   const storyCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9)),url("${story.imageUrl}")`;
 
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <Card sx={{ minWidth: 284, maxWidth: 300, overflow: "hidden" }}>
       <CardActionArea
         sx={{ position: "relative" }}
         component={Link}

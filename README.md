@@ -90,14 +90,6 @@ yarn cypress
     - [ ] Disable all fields in while sending request
     - [x] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
-- [ ] Create redux slices
-
-  - [ ] Create redux user slice to save user information
-    - [ ] add user endpoints fullfiled in extraRedeucers (getUser, getUserAccount)
-    - [ ] add auth endpoints fullfiled in extraRedeucers (login, logout, register, activateUser)
-  - [ ] Create redux allstories slice to allow modify the state
-    - [ ] add getAllStories endpoint fullfiled in extraRedeucers (getAllStories)
-
 - [] Create layout
 
   - [x] Create navbar
@@ -125,7 +117,7 @@ yarn cypress
       - [ ] Add "..." if the first chapter text is too long
     - [x] Create StoryList component
       - [ ] Refactor to get stories from props
-      - [ ] Add masonry layout for the stories
+      - [x] Add masonry layout for the stories
     - [ ] Add pagination feature
     - [ ] Add form or button to start to create a story
 

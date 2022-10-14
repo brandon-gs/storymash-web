@@ -9,6 +9,8 @@ export { default as Link } from "./Link/Link";
 export { default as ListValidate } from "./ListValidate/ListValidate";
 export { default as Validate } from "./ListValidate/Validate/Validate";
 export { default as Main } from "./Main/Main";
+export { default as Masonry } from "./Masonry/Masonry";
+export { default as useMasonry } from "./Masonry/useMasonry";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as NavbarAppbar } from "./Navbar/NavbarAppbar/NavbarAppbar";
 export { default as NavbarDrawer } from "./Navbar/NavbarDrawer/NavbarDrawer";

@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Container, styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import { useAppSelector } from "@/core/hooks";
 import { DRAWER_WIDTH } from "@/core/utils";
@@ -33,10 +33,10 @@ const Main: FC<PropsWithChildren> = ({ children }) => {
   const drawer = useAppSelector(selectDrawer);
 
   return (
-    <>
+    <Container maxWidth="lg">
       <NavbarDrawerHeader />
       <StyledMain open={drawer.open}>{children}</StyledMain>
-    </>
+    </Container>
   );
 };
 
