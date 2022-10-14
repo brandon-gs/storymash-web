@@ -3,17 +3,17 @@ import {
   FormInput,
   FormInputFileButton,
 } from "@/core/components";
-import {
-  useGetUserQuery,
-  useOnboardingSkipMutation,
-  useOnboardingUpdateProfileMutation,
-} from "@/core/services/User/userApi";
+import { useGetUserQuery } from "@/core/services/";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import {
+  useOnboardingSkipMutation,
+  useOnboardingUpdateProfileMutation,
+} from "../../services";
 import {
   IOnboardingProfileSchema,
   onboardingProfileSchema,

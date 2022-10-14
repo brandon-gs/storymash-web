@@ -97,8 +97,9 @@ describe("onboarding personal information", () => {
     cy.get("[name=birthdate]").type(mockUserOnboarding.profile.birthdate);
     cy.get("button[type=submit]").should("be.enabled").click();
     cy.get("button[type=submit]").should("not.be.enabled");
-    cy.wait("@onboardingPersonal");
-    cy.url().should("include", "/onboarding/gender");
-    cy.getSnackbar("Success").should("exist");
+    cy.wait("@onboardingPersonal").then(() => {
+      cy.url().should("include", "/onboarding/gender");
+      cy.getSnackbar("Success").should("exist");
+    });
   });
 });

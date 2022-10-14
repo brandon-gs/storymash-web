@@ -1,14 +1,9 @@
-import { SerializedError } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import type { FieldValues, UseFormSetError } from "react-hook-form";
-import type { IBaseQueryErrors, IValidationErrors } from "../services";
+import type { IGlobalApiErrors } from "../services";
 
 const useListenInputErrors = <ISchema extends FieldValues>(
-  errors:
-    | IBaseQueryErrors
-    | IValidationErrors<ISchema>
-    | SerializedError
-    | undefined,
+  errors: IGlobalApiErrors<ISchema>,
   setError: UseFormSetError<ISchema>
 ) => {
   useEffect(() => {

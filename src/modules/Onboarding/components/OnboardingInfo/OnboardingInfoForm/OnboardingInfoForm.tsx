@@ -1,6 +1,6 @@
 import { FormInput, FormInputDate } from "@/core/components";
 import { useListenInputErrors } from "@/core/hooks";
-import { useOnboardingUpdateInfoMutation } from "@/core/services";
+import { useOnboardingUpdateInfoMutation } from "@/modules/Onboarding/services";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "@mui/lab";
 import { Box, Grid, Stack, Typography } from "@mui/material";

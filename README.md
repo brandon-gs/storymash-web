@@ -88,7 +88,7 @@ yarn cypress
     - [x] send "about me"
     - [x] Connect with api to save user's image and about
     - [ ] Disable all fields in while sending request
-    - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
+    - [x] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
 - [ ] Create redux slices
 

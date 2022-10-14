@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useGetAllStoriesQuery } from "../../services/storiesApi";
+import { useGetAllStoriesQuery } from "../../services";
 import StoryCard from "../StoryCard/StoryCard";
 
 const StoryList: FC = () => {

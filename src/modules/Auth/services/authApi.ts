@@ -1,5 +1,4 @@
-import { baseQuery } from "@/core/services";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { globalApi } from "@/core/services";
 import { TRegisterSchema } from "../components";
 import { ILoginSchema } from "../components/FormLogin/FormLoginSchema";
 
@@ -9,13 +8,11 @@ interface IRegisterResponse {
   refreshToken: string;
 }
 
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: baseQuery("auth"),
+export const authApi = globalApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<IRegisterResponse, TRegisterSchema>({
       query: (user) => ({
-        url: "register",
+        url: "/auth/register",
         method: "POST",
         body: user,
         credentials: "include",
@@ -23,26 +20,26 @@ export const authApi = createApi({
     }),
     login: builder.mutation<ILoginSchema, ILoginSchema>({
       query: (credentials) => ({
-        url: "login",
+        url: "/auth/login",
         method: "POST",
         body: credentials,
       }),
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: "/logout",
+        url: "/auth/logout",
         method: "POST",
       }),
     }),
     resendActivationCode: builder.mutation<void, void>({
       query: () => ({
-        url: "activation-code",
+        url: "/auth/activation-code",
         method: "POST",
       }),
     }),
     activateAccount: builder.mutation<{}, { code: string }>({
       query: ({ code }) => ({
-        url: `activate-account?code=${code}`,
+        url: `/auth/activate-account?code=${code}`,
         method: "POST",
       }),
     }),

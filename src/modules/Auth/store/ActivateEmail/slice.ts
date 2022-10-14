@@ -29,7 +29,11 @@ export const activateEmailSlice = createSlice({
       authApi.endpoints.register.matchRejected,
       (state, { payload }) => {
         // Show an error if it is a field error
-        if (payload !== undefined && "field" in payload.data) {
+        if (
+          payload !== undefined &&
+          "data" in payload &&
+          "field" in payload.data
+        ) {
           state.formErrors = {
             ...initialState.formErrors,
             [payload.data.field]: payload.data.message,

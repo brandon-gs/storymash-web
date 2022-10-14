@@ -1,21 +1,11 @@
-import { authQuery } from "../authQuery";
-import { createApi } from "@reduxjs/toolkit/query/react";
-// import { RTKTags } from "@/core/store";
-import type {
-  IOnboardingProfileRequest,
-  IUser,
-  IUserAccount,
-} from "./userApiTypes";
-import type { IOnboardingInfoFormSchema } from "@/modules/Onboarding/components";
+import type { IUser, IUserAccount } from "./userApiTypes";
+import { globalApi } from "../globalApi";
 
-export const userApi = createApi({
-  reducerPath: "userApi",
-  baseQuery: authQuery("user"),
-  tagTypes: ["User"],
+export const userApi = globalApi.injectEndpoints({
   endpoints: (builder) => ({
     getUser: builder.query<IUser, void>({
       query: () => ({
-        url: "/",
+        url: "/user/",
         method: "GET",
       }),
       keepUnusedDataFor: 300,
@@ -23,61 +13,17 @@ export const userApi = createApi({
     }),
     getUserAccount: builder.query<{ account: IUserAccount }, void>({
       query: () => ({
-        url: "account",
+        url: "/user/account",
         method: "GET",
         credentials: "include",
       }),
       providesTags: ["User"],
     }),
-    onboardingUpdateInfo: builder.mutation<void, IOnboardingInfoFormSchema>({
-      query: (info) => ({
-        url: "onboarding/info",
-        method: "PUT",
-        body: info,
-      }),
-      invalidatesTags: ["User"],
-    }),
-    onboardingUpdateGender: builder.mutation<void, { gender: string }>({
-      query: (body) => ({
-        url: "onboarding/gender",
-        method: "PUT",
-        body: body,
-      }),
-      invalidatesTags: ["User"],
-    }),
-    onboardingUpdateProfile: builder.mutation<void, IOnboardingProfileRequest>({
-      query: (body) => ({
-        url: "onboarding/profile",
-        method: "PUT",
-        body: body,
-      }),
-      invalidatesTags: ["User"],
-    }),
-    onboardingSkip: builder.mutation<void, void>({
-      query: () => ({
-        url: "/onboarding/finish",
-        method: "PUT",
-      }),
-    }),
   }),
 });
 
-export const {
-  useGetUserAccountQuery,
-  useGetUserQuery,
-  useOnboardingUpdateGenderMutation,
-  useOnboardingUpdateInfoMutation,
-  useOnboardingUpdateProfileMutation,
-  useOnboardingSkipMutation,
-} = userApi;
+export const { useGetUserAccountQuery, useGetUserQuery } = userApi;
 
 export const {
-  endpoints: {
-    getUserAccount,
-    getUser,
-    onboardingUpdateGender,
-    onboardingUpdateInfo,
-    onboardingUpdateProfile,
-    onboardingSkip,
-  },
+  endpoints: { getUserAccount, getUser },
 } = userApi;

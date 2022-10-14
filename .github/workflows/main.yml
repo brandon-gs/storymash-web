@@ -84,9 +84,3 @@ jobs:
 
       - name: Run tests with jest
         run: yarn test:ci
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          start: yarn start
-          wait-on: "http://localhost:3000"

@@ -27,5 +27,3 @@ export type IUserProfile = z.infer<typeof SchemaUserProfile>;
 export type IUser = z.infer<typeof SchemaUser>;
 
 // Query and Mutations Types
-
-export type IOnboardingProfileRequest = FormData;

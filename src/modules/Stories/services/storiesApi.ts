@@ -1,17 +1,14 @@
-import { baseQuery } from "@/core/services";
-import { createApi } from "@reduxjs/toolkit/dist/query/react";
+import { globalApi } from "@/core/services";
 import type { AllStoriesResponse } from "./storiesApiTypes";
 
-export const storiesApi = createApi({
-  reducerPath: "storiesApi",
-  baseQuery: baseQuery("story"),
-  endpoints: (builder) => ({
-    getAllStories: builder.query<
+export const storiesApi = globalApi.injectEndpoints({
+  endpoints: (build) => ({
+    getAllStories: build.query<
       AllStoriesResponse,
       { page: number; limit: number }
     >({
       query: ({ page, limit }) => ({
-        url: `?page=${page}&limit=${limit}`,
+        url: `/story?page=${page}&limit=${limit}`,
         method: "GET",
       }),
     }),
