@@ -27,7 +27,14 @@ const StoryCard: FC<StoryCardProps> = ({ story }) => {
         component={Link}
         href={`/stories/read/${story._id}`}
       >
-        <Box sx={{ width: "100%", height: 124, background: storyCover }} />
+        <Box
+          sx={{
+            width: "100%",
+            height: 124,
+            background: storyCover,
+            backgroundSize: "cover",
+          }}
+        />
         <StoryCardAuthor author={story.author} />
         <CardContent>
           <Typography

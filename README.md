@@ -90,11 +90,13 @@ yarn cypress
     - [ ] Disable all fields in while sending request
     - [ ] user can skip this step and make it later (save this data in database to avoid redirect the user to this page)
 
-- [ ] Create user wrapper to use at page level
+- [ ] Create redux slices
 
-  - [ ] get user information and store it in redux
-
-  - [ ] Allow enter your personal information
+  - [ ] Create redux user slice to save user information
+    - [ ] add user endpoints fullfiled in extraRedeucers (getUser, getUserAccount)
+    - [ ] add auth endpoints fullfiled in extraRedeucers (login, logout, register, activateUser)
+  - [ ] Create redux allstories slice to allow modify the state
+    - [ ] add getAllStories endpoint fullfiled in extraRedeucers (getAllStories)
 
 - [] Create layout
 
@@ -104,10 +106,12 @@ yarn cypress
     - [ ] Add User avatar with username
       - [ ] Redirect to the User profile
   - [x] Create sidebar
+    - [ ] Add "Me gustan" element above "Favoritos"
     - [ ] Sub menu
       - [ ] Add "Mis historias" element
     - [ ] Sub menu
-      - [ ] Add "Ajustes" element
+      - [ ] Add "Configuración" element
+      - [ ] Add "Preguntas frecuentes" element
       - [ ] Add "Ayuda y Feedback" element
       - [ ] Add "Cerrar sesión" element
 
@@ -118,6 +122,7 @@ yarn cypress
     - [x] Create page to read all stories
     - [x] Add stories service
     - [x] Create StoryCard component
+      - [ ] Add "..." if the first chapter text is too long
     - [x] Create StoryList component
       - [ ] Refactor to get stories from props
       - [ ] Add masonry layout for the stories
