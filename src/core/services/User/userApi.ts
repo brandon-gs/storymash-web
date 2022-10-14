@@ -53,6 +53,12 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    onboardingSkip: builder.mutation<void, void>({
+      query: () => ({
+        url: "/onboarding/finish",
+        method: "PUT",
+      }),
+    }),
   }),
 });
 
@@ -62,6 +68,7 @@ export const {
   useOnboardingUpdateGenderMutation,
   useOnboardingUpdateInfoMutation,
   useOnboardingUpdateProfileMutation,
+  useOnboardingSkipMutation,
 } = userApi;
 
 export const {
@@ -71,5 +78,6 @@ export const {
     onboardingUpdateGender,
     onboardingUpdateInfo,
     onboardingUpdateProfile,
+    onboardingSkip,
   },
 } = userApi;

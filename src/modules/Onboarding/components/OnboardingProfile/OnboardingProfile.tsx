@@ -5,6 +5,7 @@ import {
 } from "@/core/components";
 import {
   useGetUserQuery,
+  useOnboardingSkipMutation,
   useOnboardingUpdateProfileMutation,
 } from "@/core/services/User/userApi";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +27,10 @@ const OnboardingProfile = () => {
     onboardingUpdateProfile,
     { isLoading: isOnboardingUpdateProfileLoading, isSuccess },
   ] = useOnboardingUpdateProfileMutation();
+  const [
+    onboardingSkip,
+    { isLoading: onboardingSkipIsLoading, isSuccess: onboardingSkipIsSuccess },
+  ] = useOnboardingSkipMutation();
 
   const [hasValueToSend, setHasValueToSend] = useState<boolean>(false);
   const methods = useForm<IOnboardingProfileSchema>({
@@ -42,8 +47,6 @@ const OnboardingProfile = () => {
   } = methods;
 
   const onSubmitHandler: SubmitHandler<IOnboardingProfileSchema> = (values) => {
-    console.log(values);
-    console.log(values);
     const body = new FormData();
     body.append("about", values.about);
     body.append("image", values.image ? values.image[0] : undefined);
@@ -70,10 +73,10 @@ const OnboardingProfile = () => {
   }, [about, image]);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess || onboardingSkipIsSuccess) {
       router.push("/stories");
     }
-  }, [router, isSuccess]);
+  }, [router, isSuccess, onboardingSkipIsSuccess]);
 
   return (
     <FormProvider {...methods}>
@@ -137,9 +140,13 @@ const OnboardingProfile = () => {
             </Grid>
             <Grid item xs={12} sx={{ width: "100%", mt: 1 }}>
               <Stack direction="row" justifyContent={"flex-end"}>
-                <Button variant="outlined">
+                <LoadingButton
+                  variant="outlined"
+                  loading={onboardingSkipIsLoading}
+                  onClick={() => onboardingSkip()}
+                >
                   <Typography>Omitir</Typography>
-                </Button>
+                </LoadingButton>
                 <LoadingButton
                   type="submit"
                   variant="contained"
