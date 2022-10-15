@@ -1,14 +1,19 @@
 import { DRAWER_WIDTH } from "@/core/utils";
 import {
   Book,
-  ChevronLeft,
-  ChevronRight,
   Favorite,
   Home,
+  Menu as MenuIcon,
   TrendingUp,
   Whatshot,
 } from "@mui/icons-material";
-import { IconButton, useTheme, Divider, Drawer } from "@mui/material";
+import {
+  IconButton,
+  useTheme,
+  Divider,
+  Drawer,
+  Typography,
+} from "@mui/material";
 import { FC } from "react";
 import DrawerHeader from "../NavbarDrawerHeader/NavbarDrawerHeader";
 import NavbarDrawerItems from "./NavbarDrawerItems";
@@ -25,20 +30,27 @@ const NavbarDrawer: FC<INavbarDrawerProps> = ({ open, handleDrawerClose }) => {
       sx={{
         width: DRAWER_WIDTH,
         flexShrink: 0,
+        zIndex: theme.zIndex.drawer + 1000,
         "& .MuiDrawer-paper": {
           width: DRAWER_WIDTH,
-          boxSizing: "border-box",
         },
       }}
-      variant="persistent"
       anchor="left"
       open={open}
       onClose={handleDrawerClose}
     >
-      <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
+      <DrawerHeader sx={{ justifyContent: "flex-start", px: 3 }}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerClose}
+          edge="start"
+        >
+          <MenuIcon />
         </IconButton>
+        <Typography variant="h6" noWrap component="div">
+          STORYMASH
+        </Typography>
       </DrawerHeader>
 
       <Divider />

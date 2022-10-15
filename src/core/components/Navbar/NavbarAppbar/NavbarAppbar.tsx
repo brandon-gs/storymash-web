@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { DRAWER_WIDTH } from "@/core/utils";
 
 interface ISyledAppBarProps extends AppBarProps {
   open?: boolean;
@@ -16,19 +15,11 @@ interface ISyledAppBarProps extends AppBarProps {
 
 const StyledAppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})<ISyledAppBarProps>(({ theme, open }) => ({
+})<ISyledAppBarProps>(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: DRAWER_WIDTH,
-    width: `calc(100% - ${DRAWER_WIDTH}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }),
 }));
 
@@ -37,11 +28,10 @@ interface INavbarAppbarProps {
   handleDrawerOpen: () => void;
 }
 
-const NavbarAppbar: FC<INavbarAppbarProps> = ({ open, handleDrawerOpen }) => {
+const NavbarAppbar: FC<INavbarAppbarProps> = ({ handleDrawerOpen }) => {
   return (
     <StyledAppBar
       position="fixed"
-      open={open}
       sx={{ backgroundColor: "white", color: "black.main", boxShadow: 1 }}
     >
       <Toolbar>
@@ -52,7 +42,6 @@ const NavbarAppbar: FC<INavbarAppbarProps> = ({ open, handleDrawerOpen }) => {
           edge="start"
           sx={{
             marginRight: 3,
-            ...(open && { display: "none" }),
           }}
         >
           <MenuIcon />

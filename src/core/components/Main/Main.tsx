@@ -1,13 +1,10 @@
 import { Container, styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
-import { useAppSelector } from "@/core/hooks";
-import { DRAWER_WIDTH } from "@/core/utils";
-import { selectDrawer } from "@/core/store";
 import NavbarDrawerHeader from "../Navbar/NavbarDrawerHeader/NavbarDrawerHeader";
 
 const StyledMain = styled("main", {
   shouldForwardProp: (prop) => prop !== "open",
-})<{ open: boolean }>(({ theme, open }) => ({
+})(({ theme }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
   transition: theme.transitions.create("margin", {
@@ -15,13 +12,6 @@ const StyledMain = styled("main", {
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginLeft: 0,
-  ...(open && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: `${DRAWER_WIDTH}px`,
-  }),
 }));
 
 /**
@@ -30,12 +20,10 @@ const StyledMain = styled("main", {
  * @returns React component
  */
 const Main: FC<PropsWithChildren> = ({ children }) => {
-  const drawer = useAppSelector(selectDrawer);
-
   return (
     <Container maxWidth="lg">
       <NavbarDrawerHeader />
-      <StyledMain open={drawer.open}>{children}</StyledMain>
+      <StyledMain>{children}</StyledMain>
     </Container>
   );
 };
