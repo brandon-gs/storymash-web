@@ -1,6 +1,6 @@
 import { Masonry } from "@/core/components";
-import { FC, useState } from "react";
-import { useGetAllStoriesQuery } from "../../services";
+import { FC } from "react";
+import { AllStoriesResponse } from "../../services";
 import StoryCard from "../StoryCard/StoryCard";
 
 const breakpointColumnsObj = {
@@ -10,26 +10,25 @@ const breakpointColumnsObj = {
   660: 1,
 };
 
-const StoryList: FC = () => {
-  const [page] = useState(0);
+interface StoryListProps {
+  stories?: AllStoriesResponse["docs"];
+  isLoading?: boolean;
+  isFetching: boolean;
+}
 
-  const { data: stories, ...storiesQuery } = useGetAllStoriesQuery({
-    page,
-    limit: 5,
-  });
-
-  if (storiesQuery.isLoading) {
-    return <p>Loading</p>;
+const StoryList: FC<StoryListProps> = ({ stories, isLoading, isFetching }) => {
+  if (isLoading || isFetching) {
+    return <div>Cargando...</div>;
   }
 
-  if (!stories) {
-    return <p>Ocurrio un error al intentar obtener las historias</p>;
+  if (!Array.isArray(stories)) {
+    return <div>Recargar...</div>;
   }
 
   return (
     <>
       <Masonry breakpointsCols={breakpointColumnsObj} fixedColumnWidth={284}>
-        {stories.docs.map((story) => (
+        {stories.map((story) => (
           <StoryCard key={story._id} story={story} />
         ))}
       </Masonry>

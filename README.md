@@ -116,7 +116,7 @@ yarn cypress
     - [x] Create StoryCard component
       - [ ] Add "..." if the first chapter text is too long
     - [x] Create StoryList component
-      - [ ] Refactor to get stories from props
+      - [x] Refactor to get stories from props
       - [x] Add masonry layout for the stories
     - [ ] Add pagination feature
     - [ ] Add form or button to start to create a story
