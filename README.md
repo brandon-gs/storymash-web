@@ -119,8 +119,9 @@ yarn cypress
       - [x] Refactor to get stories from props
       - [x] Add masonry layout for the stories
     - [x] Add infinite scroll feature
-      - [ ] Refactor pages/stories.tsx to make the infinite scroll logic reusable
-    - [ ] Create loader component
+      - [x] Refactor pages/stories.tsx to make the infinite scroll logic reusable
+    - [x] Create loader component
+    - [ ] Create skeleton component for story card and show skeleton instead loader
     - [ ] Create error trying fetch data and allow refetch data
     - [ ] Add form or button to start to create a story
 

@@ -1,5 +1,6 @@
 export { default as AvatarWithSkeleton } from "./AvatarWithSkeleton/AvatarWithSkeleton";
 export { default as ButtonBack } from "./ButtonBack/ButtonBack";
+export { default as CircularLoader } from "./CircularLoader/CircularLoader";
 export { default as FormCheckbox } from "./FormCheckbox/FormCheckbox";
 export { default as FormInput } from "./FormInput/FormInput";
 export { default as useFormInput } from "./FormInput/useFormInput";

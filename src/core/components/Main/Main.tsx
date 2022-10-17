@@ -6,6 +6,8 @@ const StyledMain = styled("main", {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
   flexGrow: 1,
+  width: "100%",
+  height: "100%",
   padding: theme.spacing(3),
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
@@ -21,7 +23,7 @@ const StyledMain = styled("main", {
  */
 const Main: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ width: "100%", height: "100%" }}>
       <NavbarDrawerHeader />
       <StyledMain>{children}</StyledMain>
     </Container>

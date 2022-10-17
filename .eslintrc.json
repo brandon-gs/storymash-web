@@ -5,8 +5,10 @@
     "eslint:recommended",
     "prettier",
     "plugin:storybook/recommended",
-    "plugin:cypress/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "overrides": [
     {
       "files": ["**/*.test.tsx"],

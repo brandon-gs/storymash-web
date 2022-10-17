@@ -1,9 +1,9 @@
 import { Link } from "@/core/components";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const StoriesEmpty = () => {
   return (
-    <>
+    <Box pb={2}>
       <Typography component={"h3"} variant={"h4"} align={"center"} mt={9}>
         Ya no hay más historias.
       </Typography>
@@ -13,7 +13,7 @@ const StoriesEmpty = () => {
           creando una historia!
         </Link>
       </Typography>
-    </>
+    </Box>
   );
 };
 export default StoriesEmpty;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Head from "next/head";
 import { Navbar, Main } from "@/core/components";
-import { StoriesEmpty, StoryList } from "@/modules/Stories/components";
+import { StoryList } from "@/modules/Stories/components";
 import { useGetAllStoriesQuery } from "@/modules/Stories";
 import { useAppSelector, useNearScreen, useDebounce } from "@/core/hooks";
 import {
@@ -43,20 +43,12 @@ const StoriesPage: FC = () => {
       <Navbar />
       <Main>
         <StoryList
+          observerRef={observerRef}
           stories={stories}
           isLoading={isLoading}
           isFetching={isFetching}
+          hasNextPage={hasNextPage}
         />
-        {hasNextPage && (
-          <>
-            <div style={{ width: "100%", height: "500px" }} />
-            <div
-              ref={observerRef}
-              style={{ width: "100%", height: "10px", background: "red" }}
-            />
-          </>
-        )}
-        {!isLoading && <StoriesEmpty />}
       </Main>
     </>
   );
