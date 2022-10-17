@@ -14,13 +14,17 @@ export const storiesAllSlice = createSlice({
   initialState,
   reducers: {
     updateAllStoriesNextPage(state) {
-      state.page = state.page + 1;
+      if (state.hasNextPage) {
+        state.page = state.page + 1;
+      }
     },
   },
   extraReducers: (build) => {
     build.addMatcher(getAllStories.matchFulfilled, (state, { payload }) => {
       state.stories =
-        state.page > 0 ? [...state.stories, ...payload.docs] : payload.docs;
+        state.page > 0 && state.hasNextPage
+          ? [...state.stories, ...payload.docs]
+          : payload.docs;
       state.hasNextPage = payload.hasNextPage;
     });
   },
