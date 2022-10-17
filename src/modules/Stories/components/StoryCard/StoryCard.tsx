@@ -1,4 +1,5 @@
 import { Link } from "@/core/components";
+import { useBlurImage } from "@/core/hooks";
 import {
   Box,
   Card,
@@ -8,6 +9,7 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 import { FC } from "react";
 import { StoryCardResponse } from "../../services/storiesApiTypes";
 import StoryCardAuthor from "./StoryCardAuthor";
@@ -15,10 +17,15 @@ import StoryCardFooter from "./StoryCardFooter";
 
 interface StoryCardProps {
   story: StoryCardResponse;
+  index?: number;
 }
 
-const StoryCard: FC<StoryCardProps> = ({ story }) => {
-  const storyCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9)),url("${story.imageUrl}")`;
+const StoryCard: FC<StoryCardProps> = ({ story, index }) => {
+  const storyCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9))`;
+
+  const { blurUrl, originalUrl } = useBlurImage(story.imageUrl, {
+    width: 568,
+  });
 
   return (
     <Card sx={{ minWidth: 284, maxWidth: 300, overflow: "hidden" }}>
@@ -29,12 +36,21 @@ const StoryCard: FC<StoryCardProps> = ({ story }) => {
       >
         <Box
           sx={{
+            position: "relative",
             width: "100%",
             height: 124,
             background: storyCover,
-            backgroundSize: "cover",
           }}
-        />
+        >
+          <Image
+            src={originalUrl}
+            alt={story.title}
+            layout="fill"
+            placeholder={"blur"}
+            blurDataURL={blurUrl}
+            {...(index ?? 0 < 5 ? { loading: "eager" } : {})}
+          />
+        </Box>
         <StoryCardAuthor author={story.author} />
         <CardContent>
           <Typography

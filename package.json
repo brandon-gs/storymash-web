@@ -25,6 +25,7 @@
     ]
   },
   "dependencies": {
+    "@cld-apis/utils": "^0.2.0",
     "@date-io/date-fns-jalali": "^2.16.0",
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
@@ -36,6 +37,7 @@
     "@mui/material": "^5.10.5",
     "@mui/x-date-pickers": "^5.0.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "cloudinary-build-url": "^0.2.4",
     "date-fns": "^2.29.3",
     "intersection-observer": "^0.12.2",
     "isomorphic-fetch": "^3.0.0",
@@ -47,10 +49,12 @@
     "react-hook-form": "^7.35.0",
     "react-redux": "^8.0.2",
     "redux-persist": "^6.0.0",
+    "sharp": "^0.31.1",
     "zod": "^3.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
+    "@cld-apis/types": "^0.1.6",
     "@storybook/addon-actions": "^6.5.11",
     "@storybook/addon-essentials": "^6.5.11",
     "@storybook/addon-interactions": "^6.5.11",
