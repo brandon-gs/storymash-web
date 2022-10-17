@@ -1,10 +1,10 @@
-import { Box } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import useMasonry from "./useMasonry";
 
 export interface MasonryProps extends PropsWithChildren {
   breakpointsCols?: number | Record<"default" | number, number>;
-  columnAttrs?: Record<string, any>; // object, added to the columns
+  columnAttrs?: BoxProps; // object, added to the columns
   fixedColumnWidth?: number;
 }
 

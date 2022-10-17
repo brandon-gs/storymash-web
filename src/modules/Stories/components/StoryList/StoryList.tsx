@@ -1,11 +1,12 @@
-import { CircularLoader, Masonry } from "@/core/components";
+import { Masonry } from "@/core/components";
 import { Box } from "@mui/material";
 import { FC } from "react";
 import { AllStoriesResponse } from "../../services";
 import StoriesEmpty from "../StoriesEmpty/StoriesEmpty";
 import StoryCard from "../StoryCard/StoryCard";
+import StoryListSkeleton from "./StoryListSkeleton";
 
-const breakpointColumnsObj = {
+export const storyListBreakpoints = {
   default: 4,
   1200: 3,
   900: 2,
@@ -28,7 +29,7 @@ const StoryList: FC<StoryListProps> = ({
   observerRef,
 }) => {
   if (isLoading) {
-    return <CircularLoader />;
+    return <StoryListSkeleton length={12} />;
   }
 
   // TODO: Add component to try to refetch the stories
@@ -38,14 +39,14 @@ const StoryList: FC<StoryListProps> = ({
 
   return (
     <>
-      <Masonry breakpointsCols={breakpointColumnsObj} fixedColumnWidth={284}>
+      <Masonry breakpointsCols={storyListBreakpoints} fixedColumnWidth={284}>
         {stories.map((story, idx) => (
           <StoryCard key={`${story._id}-${idx}`} story={story} index={idx} />
         ))}
       </Masonry>
       {hasNextPage && (
         <>
-          <CircularLoader height={400} />
+          <StoryListSkeleton length={12} />;
           <div ref={observerRef} />
         </>
       )}

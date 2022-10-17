@@ -10,15 +10,17 @@ import {
   selectAllStoriesPage,
   updateAllStoriesNextPage,
 } from "@/modules/Stories/store";
+import { useGetUserQuery } from "@/core/services";
 
 const StoriesPage: FC = () => {
+  useGetUserQuery();
   const page = useAppSelector(selectAllStoriesPage);
   const stories = useAppSelector(selectAllStories);
   const hasNextPage = useAppSelector(selectAllStoriesHasNextPage);
 
   const { isNearScreen, observerRef } = useNearScreen<HTMLDivElement>({
     once: false,
-    distance: 800,
+    distance: 2000,
   });
 
   const { isLoading, isFetching } = useGetAllStoriesQuery(

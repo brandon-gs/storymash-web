@@ -2,6 +2,8 @@ export { default as StoriesEmpty } from "./StoriesEmpty/StoriesEmpty";
 export { default as StoryCard } from "./StoryCard/StoryCard";
 export { default as StoryCardAuthor } from "./StoryCard/StoryCardAuthor";
 export { default as StoryCardFooter } from "./StoryCard/StoryCardFooter";
+export { default as StoryCardSkeleton } from "./StoryCard/StoryCardSkeleton";
 export { default as StoryLike } from "./StoryLike/StoryLike";
 export { default as StoryList } from "./StoryList/StoryList";
+export { default as StoryListSkeleton } from "./StoryList/StoryListSkeleton";
 export { default as StoryStats } from "./StoryStats/StoryStats";

@@ -26,8 +26,8 @@ const useMasonry = ({ breakpointsCols, children, ...props }: MasonryProps) => {
       };
     }
     let matchedBreakpoint = Infinity;
-    let columns = breakpointColsObject!.default || DEFAULT_COLUMNS;
-    for (let breakpoint in breakpointColsObject) {
+    let columns = breakpointColsObject?.default || DEFAULT_COLUMNS;
+    for (const breakpoint in breakpointColsObject) {
       const optBreakpoint =
         breakpoint === "default"
           ? breakpointColsObject.default
@@ -71,10 +71,10 @@ const useMasonry = ({ breakpointsCols, children, ...props }: MasonryProps) => {
 
   const itemsInColumns = () => {
     const currentColumnCount = columnCount;
-    const itemsInColumns = new Array(currentColumnCount);
-
     // Force children to be handled as an array
     const items = React.Children.toArray(children);
+
+    const itemsInColumns: Array<typeof items> = new Array(currentColumnCount);
 
     for (let i = 0; i < items.length; i++) {
       const columnIndex = i % currentColumnCount;

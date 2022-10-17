@@ -28,7 +28,7 @@ const StoryCard: FC<StoryCardProps> = ({ story, index }) => {
   });
 
   return (
-    <Card sx={{ minWidth: 284, maxWidth: 300, overflow: "hidden" }}>
+    <Card sx={{ width: 284, overflow: "hidden" }}>
       <CardActionArea
         sx={{ position: "relative" }}
         component={Link}
