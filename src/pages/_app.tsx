@@ -33,6 +33,8 @@ function MyApp({
               name="viewport"
               content="initial-scale=1, width=device-width"
             />
+            <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_URL} />
+            <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_API_URL} />
           </Head>
           <ThemeProvider theme={theme}>
             <SnackbarProvider
