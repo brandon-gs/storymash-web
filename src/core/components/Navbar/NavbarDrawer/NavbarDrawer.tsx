@@ -1,5 +1,6 @@
 import { DRAWER_WIDTH } from "@/core/utils";
 import {
+  AddBox,
   Book,
   Favorite,
   Home,
@@ -15,6 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
+import AvatarUser from "../../AvatarUser/AvatarUser";
 import DrawerHeader from "../NavbarDrawerHeader/NavbarDrawerHeader";
 import NavbarDrawerItems from "./NavbarDrawerItems";
 
@@ -81,6 +83,22 @@ const NavbarDrawer: FC<INavbarDrawerProps> = ({ open, handleDrawerClose }) => {
             label: "Tendencias",
             pathname: "/stories/trending",
             Icon: <Whatshot />,
+          },
+        ]}
+      />
+      <Divider />
+      <NavbarDrawerItems
+        open={open}
+        items={[
+          {
+            label: "Crear",
+            pathname: "/stories/create",
+            Icon: <AddBox />,
+          },
+          {
+            label: "Perfil",
+            pathname: "/profile",
+            Icon: <AvatarUser width={24} />,
           },
         ]}
       />

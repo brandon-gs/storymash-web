@@ -7,8 +7,12 @@ type IUseBlurImageOptions = {
 
 const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
-const useBlurImage = (imageUrl: string, { width }: IUseBlurImageOptions) => {
+const useBlurImage = (
+  imageUrl: string | undefined,
+  { width }: IUseBlurImageOptions
+) => {
   const originalUrl = useMemo(() => {
+    if (!imageUrl) return "";
     return buildUrl(imageUrl, {
       cloud: {
         cloudName,
@@ -25,6 +29,7 @@ const useBlurImage = (imageUrl: string, { width }: IUseBlurImageOptions) => {
   }, [imageUrl, width]);
 
   const blurUrl = useMemo(() => {
+    if (!imageUrl) return "";
     return buildUrl(imageUrl, {
       cloud: {
         cloudName,

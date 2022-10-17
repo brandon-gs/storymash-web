@@ -9,7 +9,7 @@ const StoriesEmpty = () => {
       </Typography>
       <Typography component={"h3"} variant={"h5"} align={"center"} mb={10}>
         ¡Ayuda a nuestra comunidad{" "}
-        <Link href={"/story/add"} underline={"none"}>
+        <Link href={"/stories/create"} underline={"none"}>
           creando una historia!
         </Link>
       </Typography>
