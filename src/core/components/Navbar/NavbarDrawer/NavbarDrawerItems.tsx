@@ -1,3 +1,5 @@
+import { useAppDispatch } from "@/core/hooks";
+import { handleCloseDrawer } from "@/core/store";
 import {
   List,
   ListItem,
@@ -6,7 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import Link from "../../Link/Link";
 
 interface INavbarDrawerItem {
@@ -21,7 +23,15 @@ interface INavbarDrawerItemsProps {
 }
 
 const NavbarDrawerItems: FC<INavbarDrawerItemsProps> = ({ open, items }) => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    router.events.on("routeChangeComplete", () => {
+      dispatch(handleCloseDrawer());
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <List>
