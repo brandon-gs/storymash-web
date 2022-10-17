@@ -33,6 +33,8 @@ export const rtkQueryErrorLogger: Middleware =
 
     // handle api errors
     if (isRejectedWithValue(action)) {
+      if (!payload || !payload.data) return next(action);
+
       SnackbarUtils.close(SNACKBAR_RTK_MIDDLEWARE.error);
       // redirect to login page
       if (payload.originalStatus === 401) {

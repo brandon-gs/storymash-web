@@ -1,3 +1,4 @@
+export { default as StoriesEmpty } from "./StoriesEmpty/StoriesEmpty";
 export { default as StoryCard } from "./StoryCard/StoryCard";
 export { default as StoryCardAuthor } from "./StoryCard/StoryCardAuthor";
 export { default as StoryCardFooter } from "./StoryCard/StoryCardFooter";

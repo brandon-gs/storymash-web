@@ -1,4 +1,5 @@
 import { Masonry } from "@/core/components";
+import { Box } from "@mui/material";
 import { FC } from "react";
 import { AllStoriesResponse } from "../../services";
 import StoryCard from "../StoryCard/StoryCard";
@@ -16,20 +17,22 @@ interface StoryListProps {
   isFetching: boolean;
 }
 
-const StoryList: FC<StoryListProps> = ({ stories, isLoading, isFetching }) => {
-  if (isLoading || isFetching) {
-    return <div>Cargando...</div>;
+const StoryList: FC<StoryListProps> = ({ stories, isLoading }) => {
+  // TODO: Add the loader component
+  if (isLoading) {
+    return <Box sx={{ height: "100vh", width: "100%" }}>Cargando...</Box>;
   }
 
+  // TODO: Add component to try to refetch the stories
   if (!Array.isArray(stories)) {
-    return <div>Recargar...</div>;
+    return <Box sx={{ height: "100vh", width: "100%" }}>Recargar...</Box>;
   }
 
   return (
     <>
       <Masonry breakpointsCols={breakpointColumnsObj} fixedColumnWidth={284}>
-        {stories.map((story) => (
-          <StoryCard key={story._id} story={story} />
+        {stories.map((story, idx) => (
+          <StoryCard key={`${story._id}-${idx}`} story={story} />
         ))}
       </Masonry>
     </>

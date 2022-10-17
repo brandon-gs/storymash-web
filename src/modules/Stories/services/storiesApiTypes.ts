@@ -25,3 +25,5 @@ export interface StoryCardResponse {
 }
 
 export type AllStoriesResponse = Paginate<StoryCardResponse>;
+
+export type IStoryPreview = StoryCardResponse;
