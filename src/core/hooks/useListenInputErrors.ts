@@ -18,7 +18,6 @@ const useListenInputErrors = <ISchema extends FieldValues>(
         if (type !== "body") return;
 
         setError(fieldName, { message: currentError.message });
-        console.log(currentError);
       }
     }
   }, [errors, setError]);

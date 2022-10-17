@@ -13,8 +13,6 @@ import {
 function OnboardingInfoForm() {
   const [updateInfo, { isLoading, error }] = useOnboardingUpdateInfoMutation();
 
-  console.log(error);
-
   const methods = useForm<IOnboardingInfoFormSchema>({
     resolver: zodResolver(onboardingInfoFormSchema),
     mode: "all",

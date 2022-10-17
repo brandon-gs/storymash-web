@@ -92,7 +92,6 @@ const useMasonry = ({ breakpointsCols, children, ...props }: MasonryProps) => {
   const renderColumns = () => {
     const { columnAttrs = {}, fixedColumnWidth } = props;
     const childrenInColumns = itemsInColumns();
-    console.log(childrenInColumns);
     const columnWidth =
       childrenInColumns.length === 1
         ? "100%"
