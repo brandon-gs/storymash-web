@@ -1,13 +1,11 @@
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import {
-  IconButton,
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-} from "@mui/material";
+import { IconButton, InputAdornment, type TextFieldProps } from "@mui/material";
+import dynamic from "next/dynamic";
 import { FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import useFormInput from "./useFormInput";
+
+const TextField = dynamic(() => import("@mui/material/TextField"));
 
 type IFormInputProps = {
   name: string;

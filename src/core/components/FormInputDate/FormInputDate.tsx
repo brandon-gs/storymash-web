@@ -1,13 +1,19 @@
 import { useRef, type FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import {
-  DatePicker,
-  LocalizationProvider,
-  type MobileDatePickerProps,
-} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import type { MobileDatePickerProps } from "@mui/x-date-pickers";
 import { TextField, buttonBaseClasses } from "@mui/material";
 import { es } from "date-fns/locale";
+import dynamic from "next/dynamic";
+
+const DatePicker = dynamic(() =>
+  import("@mui/x-date-pickers/DatePicker").then((mod) => mod.DatePicker)
+);
+const LocalizationProvider = dynamic(() =>
+  import("@mui/x-date-pickers/LocalizationProvider").then(
+    (mod) => mod.LocalizationProvider
+  )
+);
 
 type IFormInputDateProps = {
   name: string;
@@ -32,7 +38,7 @@ const FormInputDate: FC<IFormInputDateProps> = ({ name, ...otherProps }) => {
       render={({ field }) => (
         <LocalizationProvider
           adapterLocale={es}
-          dateAdapter={AdapterDateFns}
+          dateAdapter={AdapterDayjs}
           localeText={{
             cancelButtonLabel: "Cancelar",
             okButtonLabel: "Seleccionar",
