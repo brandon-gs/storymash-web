@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import React from "react";
-import { useCallback, useEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
+import { useCallback, useState } from "react";
 import { MasonryProps } from "./Masonry";
 
-const DEFAULT_COLUMNS = 2;
+const DEFAULT_COLUMNS = 1;
 const useMasonry = ({ breakpointsCols, children, ...props }: MasonryProps) => {
   const [columnCount, setColumnCount] = useState(() => {
     return breakpointsCols === undefined
@@ -125,7 +125,7 @@ const useMasonry = ({ breakpointsCols, children, ...props }: MasonryProps) => {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     reCalculateColumnCount();
     // window may not be available in some environments like SSR
     if (window) {
