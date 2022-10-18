@@ -1,7 +1,7 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import debounce from "just-debounce-it";
 import { useEffect } from "react";
-import { useAppDispatch } from "./useRedux";
+import { useAppDispatch } from "./useAppDispatch";
 
 export interface IUseDebounceParams {
   callback: () => void;

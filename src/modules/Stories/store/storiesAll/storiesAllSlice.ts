@@ -14,9 +14,13 @@ export const storiesAllSlice = createSlice({
   initialState,
   reducers: {
     updateAllStoriesNextPage(state) {
-      if (state.hasNextPage) {
-        state.page = state.page + 1;
-      }
+      state.page = state.page + 1;
+    },
+    updateAllStoriesPage(
+      state,
+      { payload }: PayloadAction<{ newPage: number }>
+    ) {
+      state.page = payload.newPage;
     },
     addLikeToStoryCard(
       state,
@@ -42,9 +46,7 @@ export const storiesAllSlice = createSlice({
   extraReducers: (build) => {
     build.addMatcher(getAllStories.matchFulfilled, (state, { payload }) => {
       state.stories =
-        state.page > 0 && state.hasNextPage
-          ? [...state.stories, ...payload.docs]
-          : payload.docs;
+        state.page > 0 ? [...state.stories, ...payload.docs] : payload.docs;
       state.hasNextPage = payload.hasNextPage;
     });
   },
@@ -54,6 +56,7 @@ export const {
   updateAllStoriesNextPage,
   addLikeToStoryCard,
   removeLikeToStoryCard,
+  updateAllStoriesPage,
 } = storiesAllSlice.actions;
 
 export const selectAllStories = (state: AppState) => state.allStories.stories;
