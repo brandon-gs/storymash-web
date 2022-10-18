@@ -6,7 +6,7 @@ import { LoadingButton } from "@mui/lab";
 interface ButtonBackProps {
   message: string;
   href: string;
-  onClick?: Function;
+  onClick?: () => void | Promise<void>;
   isLoading?: boolean;
 }
 

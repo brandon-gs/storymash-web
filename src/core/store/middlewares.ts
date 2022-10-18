@@ -1,5 +1,5 @@
 import { isRejectedWithValue, isFulfilled } from "@reduxjs/toolkit";
-import type { MiddlewareAPI, Middleware } from "@reduxjs/toolkit";
+import type { Middleware } from "@reduxjs/toolkit";
 import { SnackbarUtils } from "../utils";
 import Router from "next/router";
 
@@ -13,7 +13,7 @@ const SNACKBAR_RTK_MIDDLEWARE = {
  */
 export const rtkQueryErrorLogger: Middleware =
   // eslint-disable-next-line no-unused-vars
-  (_api: MiddlewareAPI) => (next) => async (action) => {
+  () => (next) => async (action) => {
     const { payload } = action;
     // Handle sucess request
     if (isFulfilled(action)) {

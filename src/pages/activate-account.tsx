@@ -28,6 +28,10 @@ const ActivateAccountPage = () => {
 
   const [logout, { ...logoutMutation }] = useLogoutMutation();
 
+  const handleLogout = () => {
+    logout();
+  };
+
   const { time, reset, saveTime } = useIntervalCounter({
     id: "send_email_activation",
     type: "decrement",
@@ -120,7 +124,7 @@ const ActivateAccountPage = () => {
               <ButtonBack
                 message="Back to login"
                 href="/"
-                onClick={logout}
+                onClick={handleLogout}
                 isLoading={logoutMutation.isLoading}
               />
             </Grid>

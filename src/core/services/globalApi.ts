@@ -36,6 +36,7 @@ export const globalApi = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1/`,
     mode: "cors",
     credentials: "include",
+    // eslint-disable-next-line @typescript-eslint/ban-types
   }) as BaseQueryFn<string | FetchArgs, unknown, IGlobalApiErrors, {}>,
   tagTypes: ["User"],
   endpoints: () => ({}),

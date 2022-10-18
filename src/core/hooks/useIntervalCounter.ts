@@ -10,9 +10,9 @@ export interface IUseIntervalCounterParams {
   resetFrom?: number;
   min?: number;
   max?: number;
-  onMaxReached?: Function;
-  onMinReached?: Function;
-  onReset?: Function;
+  onMaxReached?: () => void;
+  onMinReached?: () => void;
+  onReset?: () => void;
 }
 
 const useIntervalCounter = ({

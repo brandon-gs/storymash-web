@@ -2,7 +2,7 @@ import { Stack, StackProps } from "@mui/material";
 import { FC } from "react";
 import Validate from "./Validate/Validate";
 
-export interface IListValidateProps extends StackProps {}
+export type IListValidateProps = StackProps;
 
 const ListValidate: FC<IListValidateProps> = ({ ...props }) => {
   return (

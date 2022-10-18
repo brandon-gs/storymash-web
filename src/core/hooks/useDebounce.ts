@@ -1,9 +1,10 @@
+import { AnyAction } from "@reduxjs/toolkit";
 import debounce from "just-debounce-it";
 import { useEffect } from "react";
 import { useAppDispatch } from "./useRedux";
 
 export interface IUseDebounceParams {
-  callback: Function;
+  callback: () => void;
   debounceTime?: number;
   useDispatch?: boolean;
   condition?: boolean; // This condition should be true to allow execute the callback
@@ -23,7 +24,7 @@ const useDebounce = ({
     const functionDebounced = debounce(() => {
       if (mounted && condition) {
         if (useDispatch) {
-          dispatch(callback());
+          dispatch(callback() as unknown as AnyAction);
         } else {
           callback();
         }
