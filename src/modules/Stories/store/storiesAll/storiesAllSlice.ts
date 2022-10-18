@@ -20,7 +20,7 @@ export const storiesAllSlice = createSlice({
     },
     addLikeToStoryCard(
       state,
-      { payload }: PayloadAction<ILikeStoryCardPayload>
+      { payload }: PayloadAction<Omit<ILikeStoryCardPayload, "action">>
     ) {
       const { userId, storyIndex } = payload;
       state.stories[storyIndex].firstChapter.likes = [userId];
@@ -28,7 +28,7 @@ export const storiesAllSlice = createSlice({
     },
     removeLikeToStoryCard(
       state,
-      { payload }: PayloadAction<ILikeStoryCardPayload>
+      { payload }: PayloadAction<Omit<ILikeStoryCardPayload, "action">>
     ) {
       const { userId, storyIndex } = payload;
       state.stories[storyIndex].totalLikes -= 1;

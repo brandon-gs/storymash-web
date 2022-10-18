@@ -21,12 +21,12 @@ export const storiesApi = globalApi.injectEndpoints({
       ILikeStoryCardResponse,
       ILikeStoryCardPayload & { chapterId: string }
     >({
-      query: ({ storyId, chapterId }) => ({
+      query: ({ storyId, chapterId, action }) => ({
         method: "PUT",
-        url: `/story/chapter/like?storyId=${storyId}&chapterId=${chapterId}`,
+        url: `/story/chapter/like?storyId=${storyId}&chapterId=${chapterId}&action=${action}`,
       }),
       onQueryStarted: async (
-        { storyId, storyIndex },
+        { storyId, storyIndex, action },
         { dispatch, getState, queryFulfilled }
       ) => {
         const state = getState() as AppState;
@@ -34,23 +34,26 @@ export const storiesApi = globalApi.injectEndpoints({
         if (!userId) {
           return;
         }
-        dispatch(
-          addLikeToStoryCard({
-            storyIndex,
-            storyId,
-            userId,
-          })
-        );
+        const addLikeAction = addLikeToStoryCard({
+          storyIndex,
+          storyId,
+          userId,
+        });
+        const removeLikeAction = removeLikeToStoryCard({
+          storyId,
+          storyIndex,
+          userId,
+        });
+        const currentAction =
+          action === "add" ? addLikeAction : removeLikeAction;
+
+        dispatch(currentAction);
         try {
           await queryFulfilled;
         } catch {
-          dispatch(
-            removeLikeToStoryCard({
-              storyId,
-              storyIndex,
-              userId,
-            })
-          );
+          const undoAction =
+            action === "add" ? removeLikeAction : addLikeAction;
+          dispatch(undoAction);
         }
       },
     }),

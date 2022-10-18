@@ -10,10 +10,9 @@ export interface ILikeStoryCardPayload {
   userId: string;
   storyId: string;
   storyIndex: number;
+  action: "add" | "remove";
 }
 export interface ILikeStoryCardResponse {
   storyId: string;
   chapterId: string;
-  action: "add" | "remove";
-  chapterLikes: string[];
 }

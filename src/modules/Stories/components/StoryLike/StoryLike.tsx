@@ -29,8 +29,14 @@ const StoryLike: FC<StoryLikeProps> = ({
   const isAuthor = authorId === user._id;
   const prevLiked = chapterLikes.includes(user._id);
 
-  const handleLikeChapter = () => {
-    likeStoryCardChapter({ storyId, chapterId, userId: user._id, storyIndex });
+  const handleLikeChapter = (action: "add" | "remove") => () => {
+    likeStoryCardChapter({
+      storyId,
+      chapterId,
+      userId: user._id,
+      storyIndex,
+      action,
+    });
   };
 
   if (isAuthor) {
@@ -46,7 +52,7 @@ const StoryLike: FC<StoryLikeProps> = ({
   if (!prevLiked) {
     return (
       <FavoriteBorderOutlined
-        onClick={handleLikeChapter}
+        onClick={handleLikeChapter("add")}
         sx={(theme) => ({
           cursor: "pointer",
           color: theme.palette.pink.light,
@@ -57,7 +63,7 @@ const StoryLike: FC<StoryLikeProps> = ({
 
   return (
     <Favorite
-      onClick={() => alert("should remove like")}
+      onClick={handleLikeChapter("remove")}
       sx={(theme) => ({
         cursor: "pointer",
         color: theme.palette.pink.light,
