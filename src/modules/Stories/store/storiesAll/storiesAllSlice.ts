@@ -1,7 +1,7 @@
 import { AppState } from "@/core/store";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getAllStories } from "../../services";
-import { StoriesAllState } from "./storiesAllTypes";
+import { ILikeStoryCardPayload, StoriesAllState } from "./storiesAllTypes";
 
 const initialState: StoriesAllState = {
   page: 0,
@@ -18,6 +18,26 @@ export const storiesAllSlice = createSlice({
         state.page = state.page + 1;
       }
     },
+    addLikeToStoryCard(
+      state,
+      { payload }: PayloadAction<ILikeStoryCardPayload>
+    ) {
+      const { userId, storyIndex } = payload;
+      state.stories[storyIndex].firstChapter.likes = [userId];
+      state.stories[storyIndex].totalLikes += 1;
+    },
+    removeLikeToStoryCard(
+      state,
+      { payload }: PayloadAction<ILikeStoryCardPayload>
+    ) {
+      const { userId, storyIndex } = payload;
+      state.stories[storyIndex].totalLikes -= 1;
+      const likes = state.stories[storyIndex].firstChapter.likes;
+      const userLikeIdx = likes.findIndex((id) => userId === id);
+      const updatedLikes = [...likes];
+      updatedLikes.splice(userLikeIdx, 1);
+      state.stories[storyIndex].firstChapter.likes = updatedLikes;
+    },
   },
   extraReducers: (build) => {
     build.addMatcher(getAllStories.matchFulfilled, (state, { payload }) => {
@@ -30,7 +50,11 @@ export const storiesAllSlice = createSlice({
   },
 });
 
-export const { updateAllStoriesNextPage } = storiesAllSlice.actions;
+export const {
+  updateAllStoriesNextPage,
+  addLikeToStoryCard,
+  removeLikeToStoryCard,
+} = storiesAllSlice.actions;
 
 export const selectAllStories = (state: AppState) => state.allStories.stories;
 export const selectAllStoriesPage = (state: AppState) => state.allStories.page;

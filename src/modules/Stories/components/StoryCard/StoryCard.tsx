@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, memo } from "react";
 import { StoryCardResponse } from "../../services/storiesApiTypes";
 import StoryCardAuthor from "./StoryCardAuthor";
 import StoryCardFooter from "./StoryCardFooter";
@@ -20,7 +20,7 @@ interface StoryCardProps {
   index?: number;
 }
 
-const StoryCard: FC<StoryCardProps> = ({ story, index }) => {
+const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
   const storyCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9))`;
 
   const { blurUrl, originalUrl } = useBlurImage(story.imageUrl, {
@@ -87,7 +87,10 @@ const StoryCard: FC<StoryCardProps> = ({ story, index }) => {
       </CardActionArea>
       <CardActions>
         <StoryCardFooter
+          storyId={story._id}
+          chapterId={story.firstChapter._id}
           authorId={story.author._id}
+          storyIndex={index}
           chapterLikes={story.firstChapter.likes}
           totalComments={story.totalComments}
           totalLikes={story.totalLikes}
@@ -98,4 +101,6 @@ const StoryCard: FC<StoryCardProps> = ({ story, index }) => {
   );
 };
 
-export default StoryCard;
+export default memo(StoryCard, (prev, next) => {
+  return JSON.stringify(prev) === JSON.stringify(next);
+});

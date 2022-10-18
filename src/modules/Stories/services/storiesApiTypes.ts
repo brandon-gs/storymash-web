@@ -15,6 +15,7 @@ export interface StoryCardResponse {
   isDeleted: boolean;
   createdAt: string;
   firstChapter: {
+    _id: string;
     content: string;
     likes: string[];
   };
@@ -25,5 +26,6 @@ export interface StoryCardResponse {
 }
 
 export type AllStoriesResponse = Paginate<StoryCardResponse>;
+export type AllStoriesRequest = { page: number; limit: number };
 
 export type IStoryPreview = StoryCardResponse;

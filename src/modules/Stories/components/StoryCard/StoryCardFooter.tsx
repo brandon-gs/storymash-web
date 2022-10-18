@@ -5,7 +5,10 @@ import StoryLike from "../StoryLike/StoryLike";
 import StoryStats from "../StoryStats/StoryStats";
 
 interface StoryCardFooterProps {
+  storyId: string;
+  chapterId: string;
   authorId: string;
+  storyIndex: number;
   chapterLikes: string[];
   totalLikes: number;
   totalComments: number;
@@ -13,6 +16,9 @@ interface StoryCardFooterProps {
 }
 
 const StoryCardFooter: FC<StoryCardFooterProps> = ({
+  storyIndex,
+  storyId,
+  chapterId,
   authorId,
   chapterLikes,
   totalLikes,
@@ -41,7 +47,13 @@ const StoryCardFooter: FC<StoryCardFooterProps> = ({
       </Grid>
       <Grid item>
         <StoryStats value={totalLikes}>
-          <StoryLike authorId={authorId} chapterLikes={chapterLikes} />
+          <StoryLike
+            storyId={storyId}
+            chapterId={chapterId}
+            authorId={authorId}
+            storyIndex={storyIndex}
+            chapterLikes={chapterLikes}
+          />
         </StoryStats>
       </Grid>
     </Grid>

@@ -124,14 +124,15 @@ yarn cypress
     - [x] Create skeleton component for story card and show skeleton instead loader
     - [ ] Create error trying fetch data and allow refetch data
     - [x] Add form or button to start to create a story
+    - [ ] Add message to StoryCard to show if the story is in progress or is completed
 
   - [ ] Story like
 
     - [x] Create StoryLike component
     - [x] Disable button if the user is the author
-    - [ ] Like it
-      - [ ] Create service to add a like to a story
-      - [ ] Use optimistic update to update likes before the service response
+    - [x] Like it
+      - [x] Create service to add a like to a story
+      - [x] Use optimistic update to update likes before the service response
     - [ ] Remove like
       - [ ] Create service to remove a like to a story
       - [ ] Use optimistic update to update likes before the service response
