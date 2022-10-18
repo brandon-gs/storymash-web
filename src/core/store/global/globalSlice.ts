@@ -1,8 +1,10 @@
+import { getUser } from "@/core/services";
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
 import { IGlobalState } from "./globalTypes";
 
 const initialState: IGlobalState = {
+  userId: undefined,
   drawer: {
     open: false,
   },
@@ -18,6 +20,11 @@ export const globalSlice = createSlice({
     handleCloseDrawer: (state) => {
       state.drawer.open = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(getUser.matchFulfilled, (state, { payload }) => {
+      state.userId = payload._id;
+    });
   },
 });
 
