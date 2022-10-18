@@ -37,7 +37,7 @@ export const authApi = globalApi.injectEndpoints({
         method: "POST",
       }),
     }),
-    activateAccount: builder.mutation<{}, { code: string }>({
+    activateAccount: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
         url: `/auth/activate-account?code=${code}`,
         method: "POST",
