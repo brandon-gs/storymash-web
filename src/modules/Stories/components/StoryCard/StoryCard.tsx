@@ -1,4 +1,4 @@
-import { Link } from "@/core/components";
+import { Link, TimeAgo } from "@/core/components";
 import { useBlurImage } from "@/core/hooks";
 import {
   Box,
@@ -7,6 +7,7 @@ import {
   CardActions,
   CardContent,
   Chip,
+  Stack,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -14,6 +15,7 @@ import { FC, memo } from "react";
 import { StoryCardResponse } from "../../services/storiesApiTypes";
 import StoryCardAuthor from "./StoryCardAuthor";
 import StoryCardFooter from "./StoryCardFooter";
+import StoryCardStatus from "./StoryCardStatus";
 
 interface StoryCardProps {
   story: StoryCardResponse;
@@ -21,14 +23,11 @@ interface StoryCardProps {
 }
 
 const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
-  const storyCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9))`;
+  const backgroundCover = `linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.9))`;
 
   const { blurUrl, originalUrl } = useBlurImage(story.imageUrl, {
     width: 568,
   });
-
-  const isNewStory = story.totalChapters <= 1;
-  const statusLabel = isNewStory ? "Nueva historia" : "Nuevo capítulo";
 
   return (
     <Card sx={{ width: 284, overflow: "hidden", position: "relative" }}>
@@ -41,10 +40,18 @@ const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
           sx={{
             position: "relative",
             width: "100%",
-            height: 124,
-            background: storyCover,
+            height: 168,
           }}
         >
+          <Box
+            style={{
+              position: "relative",
+              zIndex: 10,
+              background: backgroundCover,
+              height: "100%",
+              width: "100%",
+            }}
+          />
           <Image
             src={originalUrl}
             alt={story.title}
@@ -53,31 +60,10 @@ const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
             blurDataURL={blurUrl}
             {...(index ?? 0 < 5 ? { loading: "eager" } : {})}
           />
+          <StoryCardStatus totalChapters={story.totalChapters} />
+          <StoryCardAuthor author={story.author} />
         </Box>
-        <Chip
-          label={statusLabel}
-          sx={[
-            {
-              position: "absolute",
-              right: 4,
-              top: 96,
-              height: 20,
-              letterSpacing: 0.5,
-              fontWeight: "bold",
-            },
-            isNewStory
-              ? {
-                  backgroundColor: "primary.light",
-                  color: "primary.contrastText",
-                }
-              : {
-                  backgroundColor: "secondary.light",
-                  color: "secondary.contrastText",
-                },
-          ]}
-        />
-        <StoryCardAuthor author={story.author} />
-        <CardContent>
+        <CardContent sx={{ pb: 1 }}>
           <Typography
             gutterBottom
             variant="h5"
@@ -108,6 +94,9 @@ const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
               })}
             />
           ))}
+          <Stack direction="row" justifyContent={"flex-end"} mt={1}>
+            <TimeAgo date={story.lastChapter} />
+          </Stack>
         </CardContent>
       </CardActionArea>
       <CardActions>

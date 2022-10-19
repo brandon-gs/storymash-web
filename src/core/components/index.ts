@@ -1,3 +1,4 @@
+export { default as AvatarUser } from "./AvatarUser/AvatarUser";
 export { default as AvatarWithSkeleton } from "./AvatarWithSkeleton/AvatarWithSkeleton";
 export { default as ButtonBack } from "./ButtonBack/ButtonBack";
 export { default as CircularLoader } from "./CircularLoader/CircularLoader";
@@ -19,3 +20,4 @@ export { default as NavbarDrawerItems } from "./Navbar/NavbarDrawer/NavbarDrawer
 export { default as NavbarDrawerHeader } from "./Navbar/NavbarDrawerHeader/NavbarDrawerHeader";
 export { default as QontoConnector } from "./QontoConnector/QontoConnector";
 export { default as QontoStepIcon } from "./QontoStepIcon/QontoStepIcon";
+export { default as TimeAgo } from "./TimeAgo/TimeAgo";

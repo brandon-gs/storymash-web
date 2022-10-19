@@ -19,8 +19,9 @@ const StoryCardAuthor: FC<StoryCardAuthorProps> = ({ author }) => {
       columnGap={1}
       sx={(theme) => ({
         position: "absolute",
-        top: 96,
+        bottom: -10,
         padding: theme.spacing(0, 2),
+        zIndex: 1000,
       })}
     >
       <Grid item>
