@@ -27,8 +27,11 @@ const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
     width: 568,
   });
 
+  const isNewStory = story.totalChapters <= 1;
+  const statusLabel = isNewStory ? "Nueva historia" : "Nuevo capítulo";
+
   return (
-    <Card sx={{ width: 284, overflow: "hidden" }}>
+    <Card sx={{ width: 284, overflow: "hidden", position: "relative" }}>
       <CardActionArea
         sx={{ position: "relative" }}
         component={Link}
@@ -51,6 +54,28 @@ const StoryCard: FC<StoryCardProps> = ({ story, index = 0 }) => {
             {...(index ?? 0 < 5 ? { loading: "eager" } : {})}
           />
         </Box>
+        <Chip
+          label={statusLabel}
+          sx={[
+            {
+              position: "absolute",
+              right: 4,
+              top: 96,
+              height: 20,
+              letterSpacing: 0.5,
+              fontWeight: "bold",
+            },
+            isNewStory
+              ? {
+                  backgroundColor: "primary.light",
+                  color: "primary.contrastText",
+                }
+              : {
+                  backgroundColor: "secondary.light",
+                  color: "secondary.contrastText",
+                },
+          ]}
+        />
         <StoryCardAuthor author={story.author} />
         <CardContent>
           <Typography

@@ -23,6 +23,7 @@ export interface StoryCardResponse {
   views: string[];
   totalLikes: number;
   totalComments: number;
+  totalChapters: number;
 }
 
 export type AllStoriesResponse = Paginate<StoryCardResponse>;
